@@ -47,7 +47,7 @@ def process_nodes(nodes):
     
     return node_groups
 
-def sys_fun_distribution(comps_st, edges, nodes, node_groups, return_details=False):
+def sys_fun(comps_st, edges, nodes, node_groups, return_details=False):
 
     G = nx.DiGraph()
     for k, v in edges.items():
@@ -170,7 +170,7 @@ def get_edge_probs(pga: float) -> dict:
     Returns
     -------
     dict
-        Dictionary of {edge: {pf: <pf>, pga_g: <pga>}}
+        Dictionary of {edge: {0: <pf>, 1: <1.-pf>}}
     """
 
     with open("../data/edges.json", "r") as file:
@@ -192,10 +192,10 @@ def get_edge_probs(pga: float) -> dict:
         ps = 1.0 # survival probability
         for k, v in equip_e['equipment_number'].items():
             ps *= (1.0 - equip[k]['pf']) ** v
-        probs[e] = {'pf': 1.0 - ps, 'pga_g': pga}
+        probs[e] = {0: 1.0 - ps, 1: ps}
 
-    with open('../data/prob.json', 'w') as file:
+    with open('../data/probs.json', 'w') as file:
         json.dump(probs, file, indent=4)
-        print("Saved ../data/prob.json")
+        print("Saved ../data/probs.json")
 
     return probs

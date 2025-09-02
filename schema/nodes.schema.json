@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "title": "Nodes (minimal)",
+  "type": "object",
+  "description": "Map of node_id -> {x, y, ...anything}",
+  "patternProperties": {
+    ".*": {
+      "type": "object",
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" }
+      },
+      "required": ["x", "y"],
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

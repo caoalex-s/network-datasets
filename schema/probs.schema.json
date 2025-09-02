@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "title": "Probabilities",
+  "type": "object",
+  "description": "Map of node_id or edge_id -> { <int_key>: probability }",
+  "patternProperties": {
+    ".*": {
+      "type": "object",
+      "patternProperties": {
+        "^[0-9]+$": { 
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

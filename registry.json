@@ -1,0 +1,9 @@
+[
+  {
+    "name": "distribution-substation-liang2022",
+    "version": "1.0.0",
+    "path": "distribution-substation-liang2022/v1",
+    "summary": "Example 110/220 kV distribution substation network (Liang 2022) with nodes, edges, macrocomponents, equipment fragility, and probability file.",
+    "license": "CC-BY-4.0"
+  }
+]
