@@ -8,10 +8,12 @@ The datasets are designed for use with [MBNpy](https://github.com/jieunbyun/mbnp
 ---
 
 ## Repository structure
+```
 ├─ registry.json # Index of available datasets
 ├─ schema/ # JSON Schemas for validation
 ├─ <dataset folders>/ # e.g. distribution-substation-liang2022/, ...
 └─ LICENSE # Licensing (MIT for code, CC-BY-4.0 for data)
+```
 
 ---
 
