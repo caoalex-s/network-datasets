@@ -1,6 +1,7 @@
 import networkx as nx
 import numpy as np
 from scipy.stats import norm
+import json
 
 def has_path_from_multiple_sources(G, sources, target_node):
     for s in sources:
@@ -155,3 +156,46 @@ def cal_fail_prob(equip_entry: dict, pga: float) -> float:
     # lognormal fragility function
     z = (np.log(pga) - np.log(mu)) / beta
     return float(norm.cdf(z))
+
+def get_edge_probs(pga: float) -> dict:
+    """
+    Compute failure probabilities for edges based on PGA.
+    Save the file as ../data/probs.ipynb
+
+    Parameters
+    ----------
+    pga : float
+        Design ground acceleration
+
+    Returns
+    -------
+    dict
+        Dictionary of {edge: {pf: <pf>, pga_g: <pga>}}
+    """
+
+    with open("../data/edges.json", "r") as file:
+        edges = json.load(file)
+
+    with open('../data/macrocomponents.json', 'r') as file:
+        mcomp = json.load(file)
+
+    with open('../data/equipment.json', 'r') as file:
+        equip = json.load(file)
+
+    for k, v in equip.items():
+        equip[k]['pf'] = cal_fail_prob(v, pga)
+
+    probs = {}
+    for e, v in edges.items():
+        equip_e = mcomp[v['macrocomponent_type']]
+        
+        ps = 1.0 # survival probability
+        for k, v in equip_e['equipment_number'].items():
+            ps *= (1.0 - equip[k]['pf']) ** v
+        probs[e] = {'pf': 1.0 - ps, 'pga_g': pga}
+
+    with open('../data/prob.json', 'w') as file:
+        json.dump(probs, file, indent=4)
+        print("Saved ../data/prob.json")
+
+    return probs
