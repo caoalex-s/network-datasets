@@ -8,9 +8,10 @@
       "type": "object",
       "properties": {
         "from": { "type": "string" },
-        "to":   { "type": "string" }
+        "to":   { "type": "string" },
+        "directed": { "type": "boolean", "default": false }
       },
-      "required": ["from", "to"],
+      "required": ["from", "to", "directed"],
       "additionalProperties": true
     }
   },
