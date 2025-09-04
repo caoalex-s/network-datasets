@@ -17,13 +17,13 @@ network reliability and resilience methods using the **Matrix-based Bayesian Net
   Dictionary of edges with from, to, and macrocomponent_type.  
   Example entry:
   ```json
-  "E1": { "from": "N1", "to": "N2", "macrocomponent_type": "M_BC110_1" }
+  "E1": { "from": "N1", "to": "N2", "directed": true, "macrocomponent_type": "M_BC110_1" }
   ```
 - `data/probs.json`  
   Dictionary of edge failure probabilities.  
   Example entry:
   ```json
-  "E1": { "pf": 0.05,"pga_g": 0.1 }
+  "E1": { "0": 0.05,"1": 0.95 }
   ```
 
 - `data/equipment.json`  

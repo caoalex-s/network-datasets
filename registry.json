@@ -1,5 +1,12 @@
 [
   {
+    "name": "toynet-11edges",
+    "version": "1.0.0",
+    "path": "toynet-11edges/v1",
+    "summary": "A small toy network with 8 nodes and 11 edges, useful for testing.",
+    "license": "CC-BY-4.0"
+  },
+  {
     "name": "distribution-substation-liang2022",
     "version": "1.0.0",
     "path": "distribution-substation-liang2022/v1",
