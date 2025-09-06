@@ -23,7 +23,7 @@ network reliability and resilience methods using the **Matrix-based Bayesian Net
   Dictionary of edge failure probabilities.  
   Example entry:
   ```json
-  "E1": { "0": 0.05,"1": 0.95 }
+  "E1": { "0": { "p": 0.05 },"1": { "p": 0.95 } }
   ```
 
 - `data/equipment.json`  

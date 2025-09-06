@@ -22,7 +22,7 @@ It can be useful for testing and demonstration purposes.
   Dictionary of edge failure probabilities.  
   Example entry:
   ```json
-  "E1": { "0": 0.2, "1": 0.8 }
+  "E1": { "0": {"p": 0.2}, "1": {"p": 0.8} }
   ```
 
 ## Data Dictionary
