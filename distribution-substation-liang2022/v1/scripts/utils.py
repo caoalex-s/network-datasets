@@ -191,7 +191,8 @@ def get_edge_probs(pga: float) -> dict:
         
         ps = 1.0 # survival probability
         for k, v in equip_e['equipment_number'].items():
-            ps *= (1.0 - equip[k]['pf']) ** v
+            # ps *= (1.0 - equip[k]['pf']) ** v # Too high failure probability
+            ps *= (1.0 - equip[k]['pf'])
         probs[e] = {0: {"p":1.0 - ps}, 1: {"p": ps}}
 
     with open('../data/probs.json', 'w') as file:
