@@ -12,7 +12,38 @@ The datasets are designed for use with [MBNpy](https://github.com/jieunbyun/mbnp
 ├─ registry.json # Index of available datasets
 ├─ schema/ # JSON Schemas for validation
 ├─ <dataset folders>/ # e.g. distribution-substation-liang2022/, ...
+├─ ndtools/ # Utility functions for loading, graph building, and general network functions
+├─ tests/ # Unit tests
 └─ LICENSE # Licensing (MIT for code, CC-BY-4.0 for data)
+```
+
+---
+
+## Installation
+
+You can install the tools `ndtools` into your Python environment.
+
+### Using pip (editable install)
+From the repository root:
+
+```bash
+# First activate your conda environment (if using conda)
+conda activate <your-env>
+
+# Then install in editable mode
+pip install -e .
+```
+
+This makes the `ndtools` package importable anywhere in that environment.
+
+### Verify installation
+```bash
+python -c "import ndtools; print(ndtools.__version__)"
+```
+
+### Run tests
+```bash
+pytest -q
 ```
 
 ---

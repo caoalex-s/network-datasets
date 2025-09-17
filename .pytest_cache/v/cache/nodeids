@@ -1,0 +1,7 @@
+[
+  "tests/test_fun_binary_graph.py::test_eval_global_conn_k1",
+  "tests/test_fun_binary_graph.py::test_eval_global_conn_k2",
+  "tests/test_fun_binary_graph.py::test_eval_global_conn_k3",
+  "tests/test_fun_binary_graph.py::test_eval_global_conn_k4",
+  "tests/test_graphs.py::test_draw_graph_from_data1"
+]

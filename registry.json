@@ -12,5 +12,12 @@
     "path": "distribution-substation-liang2022/v1",
     "summary": "Example 110/220 kV distribution substation network (Liang 2022) with nodes, edges, macrocomponents, equipment fragility, and probability file.",
     "license": "CC-BY-4.0"
+  },
+  {
+    "name": "ema-highway",
+    "version": "1.0.0",
+    "path": "ema-highway/v1",
+    "summary": "Eastern Massachusetts benchmark highway network with nodes, edges, and probability file.",
+    "license": "CC-BY-4.0"
   }
 ]

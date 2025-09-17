@@ -1,6 +1,7 @@
 from __future__ import annotations
 import argparse, json, sys
 from pathlib import Path
+import glob
 
 try:
     from jsonschema import validate
@@ -47,16 +48,20 @@ def validate_dataset(root: Path, dataset_path: str, schemas_dir: Path) -> list[s
     except Exception as e:
         problems.append(f"edges.json invalid: {e}")
 
-    # probs.json
-    try:
-        probs = load_json(probs_p)
-        validate(probs, probs_schema)
-    except FileNotFoundError:
-        problems.append(f"Missing: {probs_p}")
-    except Exception as e:
-        problems.append(f"probs.json invalid: {e}")
+    # probs.json (allow variants like probs_*.json)
+    probs_candidates = list((ds_root / "data").glob("probs*.json"))
 
-    return problems
+    if not probs_candidates:
+        problems.append(f"Missing: no probs*.json found in {ds_root/'data'}")
+    else:
+        for probs_p in probs_candidates:
+            try:
+                probs = load_json(probs_p)
+                validate(probs, probs_schema)
+            except Exception as e:
+                problems.append(f"{probs_p.name} invalid: {e}")
+
+        return problems
 
 def main():
     ap = argparse.ArgumentParser(description="Validate datasets against JSON Schemas.")
