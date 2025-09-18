@@ -1,3 +1,8 @@
 {
-  "tests/test_fun_binary_graph.py": true
+  "tests/test_fun_binary_graph.py::test_eval_global_conn_k3": true,
+  "tests/test_graphs.py::test_draw_graph_from_data1": true,
+  "tests/test_graphs.py::test_compute_edge_lengths": true,
+  "tests/test_fun_binary_graph.py::test_eval_global_conn_k1": true,
+  "tests/test_fun_binary_graph.py::test_eval_global_conn_k2": true,
+  "tests/test_fun_binary_graph.py::test_eval_global_conn_k4": true
 }

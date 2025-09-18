@@ -5,6 +5,7 @@ import json
 import matplotlib.pyplot as plt
 import networkx as nx
 from pathlib import Path
+import math
 
 def build_graph(
     nodes: Dict[str, Dict[str, Any]],
@@ -157,4 +158,20 @@ def draw_graph_from_data(
     plt.close()
 
     return out_path
+
+def compute_edge_lengths(nodes_dict, edges_dict):
+    """
+    Compute Euclidean length in km for each edge.
+      nodes_dict: {node_id: {"x": float(km), "y": float(km)}}
+      edges_dict: {edge_id: {"from": str, "to": str, "directed": bool}}
+    Returns:
+      {edge_id: float}
+    """
+    lengths = {}
+    for eid, e in edges_dict.items():
+        u, v = e["from"], e["to"]
+        x1, y1 = nodes_dict[u]["x"], nodes_dict[u]["y"]
+        x2, y2 = nodes_dict[v]["x"], nodes_dict[v]["y"]
+        lengths[eid] = math.hypot(x2 - x1, y2 - y1)
+    return lengths
 

@@ -10,4 +10,4 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["ndtools*"]
+include = ["ndtools*", "distribution_substation_liang2022.v1.scripts*"]
