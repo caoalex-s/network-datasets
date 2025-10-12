@@ -8,3 +8,13 @@ __pycache__/
 Thumbs.db
 /pytest_cache/
 .vscode/
+
+# Ignore everything in generated/
+generated/*
+# Except for these subdirectories
+!generated/ba_n60_m3/
+!generated/config_n60_deg3/
+!generated/er_60_p005/
+!generated/grid_8x8/
+!generated/rg_n60_r017/
+!generated/ws_n60_k6_b015/

@@ -19,5 +19,12 @@
     "path": "ema-highway/v1",
     "summary": "Eastern Massachusetts benchmark highway network with nodes, edges, and probability file.",
     "license": "CC-BY-4.0"
-  }
+  },
+  {
+    "name": "generated-examples",
+    "version": "1.0.0",
+    "path": "generated",
+    "summary": "Collection of synthetic example datasets generated with ndtools.network_generator. See generated/README.md and PROVENANCE.md for details.",
+    "license": "CC-BY-4.0"
+  }  
 ]

@@ -7,7 +7,14 @@
   "tests/test_fun_binary_graph.py::test_eval_travel_time_to_nearest2",
   "tests/test_fun_binary_graph.py::test_eval_travel_time_to_nearest3",
   "tests/test_fun_binary_graph.py::test_eval_travel_time_to_nearest4",
+  "tests/test_fun_binary_graph.py::test_eval_travel_time_to_nearest5",
   "tests/test_graphs.py::test_compute_edge_lengths",
   "tests/test_graphs.py::test_compute_edge_lengths1",
-  "tests/test_graphs.py::test_draw_graph_from_data1"
+  "tests/test_graphs.py::test_draw_graph_from_data1",
+  "tests/test_network_generator.py::test_barabasi_albert1",
+  "tests/test_network_generator.py::test_configuration1",
+  "tests/test_network_generator.py::test_erdos_renyi1",
+  "tests/test_network_generator.py::test_grid1",
+  "tests/test_network_generator.py::test_random_geometric1",
+  "tests/test_network_generator.py::test_watts_strogatz1"
 ]

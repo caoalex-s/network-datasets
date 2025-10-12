@@ -39,37 +39,52 @@ def draw_graph_from_data(
     """
     Load nodes/edges from JSON files in `data_dir`, draw the graph, and save to the same dir.
 
-    Expects:
-        - nodes.json : [{"id": "A", "attr1": ..., ...}, ...]
-        - edges.json : [{"source": "A", "target": "B", "eid": "e1", "attr2": ..., ...}, ...]
+    Expects (preferred, current repo format):
+        - nodes.json : {"n0": {"x": null, "y": null, ...}, ...}
+        - edges.json : [{"id": "e0","from":"n0","to":"n1",...}, ...]
+                       or {"e0":{"from":"n0","to":"n1",...}, ...}
 
-    Args:
-        data_dir: Directory containing nodes.json and edges.json.
-        layout: Layout algorithm ("spring", "kamada_kawai", "circular", "shell").
-        node_color: Color for nodes.
-        node_size: Node size in points^2.
-        edge_color: Color for edges.
-        with_node_labels: Whether to display node labels.
-        with_edge_labels: Whether to display edge labels (uses 'eid' if present).
-        title: Optional title for the plot.
-        layout_kwargs: Optional kwargs passed to the layout function.
-        output_name: Filename of the saved image (saved under data_dir).
-
-    Returns:
-        Path to the saved image file.
-
-    Example usage:
-        draw_graph_from_data("ema_highway/v1/data")
+    Auto-chooses a layout if x/y are missing or null on any node.
     """
-    def _extract_positions(G, x_key="x", y_key="y"):
-        """Return {node: (x,y)} using x/y or pos_x/pos_y if present."""
+    def _is_number(x) -> bool:
+        try:
+            return isinstance(x, (int, float)) and not math.isnan(float(x))
+        except Exception:
+            return False
+
+    def _extract_positions(G: nx.Graph, x_key="x", y_key="y") -> Dict[Any, tuple]:
+        """Return {node: (x,y)} only if ALL nodes have numeric x,y."""
         pos = {}
         for n, d in G.nodes(data=True):
-            if x_key in d and y_key in d:
-                pos[n] = (float(d[x_key]), float(d[y_key]))
-            elif "pos_x" in d and "pos_y" in d:
-                pos[n] = (float(d["pos_x"]), float(d["pos_y"]))
+            x = d.get(x_key, None)
+            y = d.get(y_key, None)
+            if _is_number(x) and _is_number(y):
+                pos[n] = (float(x), float(y))
+            else:
+                # As soon as we see an invalid coord, bail to force auto-layout
+                return {}
         return pos
+
+    def _normalize_edges(edges_raw):
+        """Return (edge_list, is_directed) from dict or list edges."""
+        if isinstance(edges_raw, dict):
+            items = list(edges_raw.values())
+        elif isinstance(edges_raw, list):
+            items = edges_raw
+        else:
+            raise TypeError(f"edges.json must be list or dict, got {type(edges_raw)}")
+
+        is_directed = False
+        if items:
+            is_directed = bool(items[0].get("directed", False))
+        edge_list = []
+        for ev in items:
+            u, v = ev.get("from"), ev.get("to")
+            if u is None or v is None:
+                raise ValueError("Each edge must have 'from' and 'to' keys.")
+            attrs = {k: val for k, val in ev.items() if k not in ("from", "to")}
+            edge_list.append((u, v, attrs))
+        return edge_list, is_directed
 
     data_dir = Path(data_dir)
     layout_kwargs = layout_kwargs or {}
@@ -79,45 +94,34 @@ def draw_graph_from_data(
     edges_path = data_dir / "edges.json"
 
     with open(nodes_path, "r", encoding="utf-8") as f:
-        nodes = json.load(f)
+        nodes = json.load(f)  # expect dict {node_id: {x,y,...}}
 
     with open(edges_path, "r", encoding="utf-8") as f:
-        edges = json.load(f)
+        edges_raw = json.load(f)  # list[dict] or dict[str, dict]
 
     # --- Build graph ---
-    # Peek at the first edge
-    first_key, first_val = next(iter(edges.items()))
-    is_directed = bool(first_val.get("directed", False))
-    # Choose graph type
+    edge_list, is_directed = _normalize_edges(edges_raw)
     G = nx.DiGraph() if is_directed else nx.Graph()
 
-    for nid, nv in nodes.items():
-        attrs = {k: v for k, v in nv.items()}
-        G.add_node(nid, **attrs)
+    if isinstance(nodes, dict):
+        for nid, nv in nodes.items():
+            G.add_node(nid, **(nv if isinstance(nv, dict) else {}))
+    else:
+        # fallback if nodes came as a list of {"id":..., ...}
+        for nd in nodes:
+            nid = nd.get("id")
+            if nid is None:
+                raise ValueError("Node entries must have an 'id' when given as a list.")
+            attrs = {k: v for k, v in nd.items() if k != "id"}
+            G.add_node(nid, **attrs)
 
-    for e, ev in edges.items():
-        u, v = ev["from"], ev["to"]
-        attrs = {k: v for k, v in ev.items() if k not in ("from", "to", "directed")}
+    for u, v, attrs in edge_list:
         G.add_edge(u, v, **attrs)
 
-    # --- Pick layout ---
-    if layout == "spring":
-        pos = nx.spring_layout(G, **layout_kwargs)
-    elif layout == "kamada_kawai":
-        pos = nx.kamada_kawai_layout(G, **layout_kwargs)
-    elif layout == "circular":
-        pos = nx.circular_layout(G, **layout_kwargs)
-    elif layout == "shell":
-        pos = nx.shell_layout(G, **layout_kwargs)
-    else:
-        raise ValueError(f"Unknown layout: {layout}")
-
-    # --- Draw ---
-    # Try to use embedded positions first
-    pos = _extract_positions(G)
-
-    # If no embedded positions, fall back to a layout algorithm
+    # --- Determine positions ---
+    pos = _extract_positions(G)  # only returns non-empty if ALL nodes have numeric x,y
     if not pos:
+        # Fallback to algorithmic layout
         if layout == "spring":
             pos = nx.spring_layout(G, **layout_kwargs)
         elif layout == "kamada_kawai":
@@ -128,7 +132,8 @@ def draw_graph_from_data(
             pos = nx.shell_layout(G, **layout_kwargs)
         else:
             raise ValueError(f"Unknown layout: {layout}")
-    
+
+    # --- Draw ---
     plt.figure(figsize=(8, 6))
     nx.draw(
         G,
@@ -142,10 +147,7 @@ def draw_graph_from_data(
     )
 
     if with_edge_labels:
-        edge_labels = {
-            (u, v): d.get("eid", "")
-            for u, v, d in G.edges(data=True)
-        }
+        edge_labels = {(u, v): d.get("eid", "") for u, v, d in G.edges(data=True)}
         nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=8)
 
     if title:

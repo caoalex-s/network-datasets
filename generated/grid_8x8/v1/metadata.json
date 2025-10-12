@@ -1,0 +1,13 @@
+{
+  "name": "network_grid_8x8",
+  "version": "v1",
+  "description": "8x8 grid demo",
+  "generator": {
+    "type": "grid",
+    "params": {
+      "rows": 8,
+      "cols": 8,
+      "p_fail": 0.1
+    }
+  }
+}

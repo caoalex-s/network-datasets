@@ -1,8 +1,7 @@
 {
-  "tests/test_fun_binary_graph.py::test_eval_global_conn_k3": true,
-  "tests/test_graphs.py::test_draw_graph_from_data1": true,
   "tests/test_graphs.py::test_compute_edge_lengths": true,
-  "tests/test_fun_binary_graph.py::test_eval_global_conn_k1": true,
   "tests/test_fun_binary_graph.py::test_eval_global_conn_k2": true,
-  "tests/test_fun_binary_graph.py::test_eval_global_conn_k4": true
+  "tests/test_fun_binary_graph.py::test_eval_global_conn_k4": true,
+  "tests/test_fun_binary_graph.py::test_eval_travel_time_to_nearest2": true,
+  "tests/test_network_generator.py::test_erdos_renyi1": true
 }

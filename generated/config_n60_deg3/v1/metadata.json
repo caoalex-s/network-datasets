@@ -1,0 +1,14 @@
+{
+  "name": "config_n60_deg3_auto",
+  "version": "v1",
+  "description": "Configuration model, n=60, avg_deg=3",
+  "generator": {
+    "type": "config",
+    "params": {
+      "n_nodes": 60,
+      "avg_deg": 3.0,
+      "p_fail": 0.1,
+      "seed": 7
+    }
+  }
+}

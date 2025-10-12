@@ -92,7 +92,7 @@ def build_base_graph(nodes: Dict[str, Dict[str, Any]],
 # ---------- tests ----------
 
 def test_draw_graph_from_data1():
-    data_dir = Path("ema-highway/v1/data")   # adjust if relative path differs
+    data_dir = Path("ema_highway/v1/data")   # adjust if relative path differs
     assert data_dir.exists(), f"Data dir not found: {data_dir}"
 
     out_path = graphs.draw_graph_from_data(
@@ -109,7 +109,7 @@ def test_draw_graph_from_data1():
     print(f"[ok] Graph created at {out_path.resolve()}")
 
 def test_compute_edge_lengths1():
-    nodes, edges, probs = load_dataset_any("toynet-11edges/v1/data")
+    nodes, edges, probs = load_dataset_any("toynet_11edges/v1/data")
 
     lengths = graphs.compute_edge_lengths(nodes, edges)
 
