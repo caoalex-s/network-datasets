@@ -1,0 +1,391 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Available Datasets &mdash; Network Datasets 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ndtools Package" href="ndtools.html" />
+    <link rel="prev" title="Quick Start Guide" href="quickstart.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Network Datasets
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Available Datasets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dataset-registry">Dataset Registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#current-datasets">Current Datasets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#toynet-11edges">toynet-11edges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ema-highway">ema-highway</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#distribution-substation-liang2022">distribution-substation-liang2022</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data-format">Data Format</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#node-format">Node Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#edge-format">Edge Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#probability-format">Probability Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#dataset-metadata">Dataset Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loading-datasets">Loading Datasets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-ndtools">Using ndtools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#direct-loading">Direct Loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#validation">Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-new-datasets">Adding New Datasets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ndtools.html">ndtools Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how%20to%20contribute.html">How to contribute</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Network Datasets</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Available Datasets</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/datasets.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="available-datasets">
+<h1>Available Datasets<a class="headerlink" href="#available-datasets" title="Link to this heading"></a></h1>
+<p>This page provides detailed information about the datasets available in the Network Datasets repository.</p>
+<section id="dataset-registry">
+<h2>Dataset Registry<a class="headerlink" href="#dataset-registry" title="Link to this heading"></a></h2>
+<p>All available datasets are listed in the <code class="docutils literal notranslate"><span class="pre">registry.json</span></code> file. Each dataset entry includes:</p>
+<ul class="simple">
+<li><p><strong>name</strong>: Unique identifier for the dataset</p></li>
+<li><p><strong>version</strong>: Dataset version number</p></li>
+<li><p><strong>path</strong>: Relative path to the dataset files</p></li>
+<li><p><strong>summary</strong>: Brief description of the dataset</p></li>
+<li><p><strong>license</strong>: License information (typically CC-BY-4.0)</p></li>
+</ul>
+</section>
+<section id="current-datasets">
+<h2>Current Datasets<a class="headerlink" href="#current-datasets" title="Link to this heading"></a></h2>
+<section id="toynet-11edges">
+<h3>toynet-11edges<a class="headerlink" href="#toynet-11edges" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Version</strong>: 1.0.0</p></li>
+<li><p><strong>License</strong>: CC-BY-4.0</p></li>
+<li><p><strong>Path</strong>: <code class="docutils literal notranslate"><span class="pre">toynet-11edges/v1</span></code></p></li>
+</ul>
+<p>A small toy network with 8 nodes and 11 edges, designed for testing and learning purposes.</p>
+<p><strong>Files</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nodes.json</span></code>: Node definitions with coordinates</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">edges.json</span></code>: Edge definitions connecting nodes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">probs.json</span></code>: Edge failure probabilities</p></li>
+</ul>
+<p><strong>Use Cases</strong>:</p>
+<ul class="simple">
+<li><p>Testing algorithms and functions</p></li>
+<li><p>Learning the data format</p></li>
+<li><p>Quick prototyping</p></li>
+</ul>
+</section>
+<section id="ema-highway">
+<h3>ema-highway<a class="headerlink" href="#ema-highway" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Version</strong>: 1.0.0</p></li>
+<li><p><strong>License</strong>: CC-BY-4.0</p></li>
+<li><p><strong>Path</strong>: <code class="docutils literal notranslate"><span class="pre">ema-highway/v1</span></code></p></li>
+</ul>
+<p>Eastern Massachusetts benchmark highway network with nodes, edges, and probability files.</p>
+<p><strong>Files</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nodes.json</span></code>: Highway intersection nodes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">edges.json</span></code>: Road segments between intersections</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">probs_bin.json</span></code>: Binary failure probabilities</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">probs_mult.json</span></code>: Multi-state failure probabilities</p></li>
+</ul>
+<dl class="simple">
+<dt><strong>Example reference</strong>:</dt><dd><p>Byun, J.-E., Ryu, H., &amp; Straub, D. (2025). Branch-and-bound algorithm for efficient reliability analysis of general coherent systems. Structural Safety, 102653.</p>
+</dd>
+</dl>
+<p><strong>Use Cases</strong>:</p>
+<ul class="simple">
+<li><p>Transportation network analysis</p></li>
+<li><p>Connectivity to critical facilities</p></li>
+<li><p>Connectivity between communities</p></li>
+<li><p>Emergency response planning</p></li>
+</ul>
+</section>
+<section id="distribution-substation-liang2022">
+<h3>distribution-substation-liang2022<a class="headerlink" href="#distribution-substation-liang2022" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Version</strong>: 1.0.0</p></li>
+<li><p><strong>License</strong>: CC-BY-4.0</p></li>
+<li><p><strong>Path</strong>: <code class="docutils literal notranslate"><span class="pre">distribution-substation-liang2022/v1</span></code></p></li>
+</ul>
+<p>Example 110/220 kV distribution substation network based on Liang et al. (2022). Includes nodes, edges, macrocomponents, equipment fragility, and probability files.</p>
+<p><strong>Files</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nodes.json</span></code>: Substation nodes with coordinates and attributes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">edges.json</span></code>: Power line connections between substations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">probs.json</span></code>: Edge failure probabilities</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">macrocomponents.json</span></code>: Component grouping information</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">equipment.json</span></code>: Equipment fragility data</p></li>
+</ul>
+<dl class="simple">
+<dt><strong>Citation</strong>:</dt><dd><p>Liang, H., Blagojevic, N., Xie, Q., &amp; Stojadinovic, B. (2022). Seismic risk analysis of electrical substations based on the network analysis method. Earthquake Engineering &amp; Structural Dynamics, 51(11), 2690-2707.</p>
+</dd>
+</dl>
+<p><strong>Use Cases</strong>:</p>
+<ul class="simple">
+<li><p>Power grid reliability analysis</p></li>
+<li><p>Seismic risk assessment</p></li>
+<li><p>Infrastructure resilience studies</p></li>
+</ul>
+</section>
+</section>
+<section id="data-format">
+<h2>Data Format<a class="headerlink" href="#data-format" title="Link to this heading"></a></h2>
+<p>All datasets follow a consistent JSON format defined by JSON schemas in the <code class="docutils literal notranslate"><span class="pre">schema/</span></code> directory.</p>
+<section id="node-format">
+<h3>Node Format<a class="headerlink" href="#node-format" title="Link to this heading"></a></h3>
+<p>Nodes are stored as a JSON object where keys are node IDs and values are attribute dictionaries:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;node_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;x&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;y&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;additional_attributes&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Required attributes</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: X-coordinate (number)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code>: Y-coordinate (number)</p></li>
+</ul>
+<p><strong>Examples of optional attributes</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: Node type (string)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">group_name</span></code>: Grouping identifier (string)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">capacity</span></code>: Capacity value (number or string)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unit</span></code>: Unit of measurement (string)</p></li>
+<li><p>Any other custom attributes</p></li>
+</ul>
+</section>
+<section id="edge-format">
+<h3>Edge Format<a class="headerlink" href="#edge-format" title="Link to this heading"></a></h3>
+<p>Edges are stored as a JSON object where keys are edge IDs and values are connection dictionaries:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;edge_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;from&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;node1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;to&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;node2&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;directed&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;additional_attributes&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Required attributes</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">from</span></code>: Source node ID (string)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to</span></code>: Target node ID (string)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">directed</span></code>: Whether edge is directed (boolean)</p></li>
+</ul>
+<p><strong>Examples of optional attributes</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">eid</span></code>: Edge identifier (string)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">macrocomponent_type</span></code>: Component type (string)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code>: Edge length (number)</p></li>
+<li><p>Any other custom attributes</p></li>
+</ul>
+</section>
+<section id="probability-format">
+<h3>Probability Format<a class="headerlink" href="#probability-format" title="Link to this heading"></a></h3>
+<p>Probabilities are stored as a JSON object mapping edge IDs to probability dictionaries:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;edge_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;0&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;p&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;p&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.95</span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Where, for example, <a href="#id1"><span class="problematic" id="id2">``</span></a>”1”` indicates the edge could imply active/working and <a href="#id3"><span class="problematic" id="id4">``</span></a>”0”` failure.</p>
+<p><strong>Required attributes</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: Integer state index starting from 0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p</span></code>: Probability of the state (number between 0 and 1)</p></li>
+</ul>
+<p><strong>Examples of optional attributes</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: Description of the state (string)</p></li>
+</ul>
+</section>
+</section>
+<section id="dataset-metadata">
+<h2>Dataset Metadata<a class="headerlink" href="#dataset-metadata" title="Link to this heading"></a></h2>
+<p>Each dataset includes a <code class="docutils literal notranslate"><span class="pre">dataset.yaml</span></code> file with metadata:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dataset-name</span>
+<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0.0</span>
+<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Human-readable title</span>
+<span class="nt">license</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CC-BY-4.0</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<span class="w">  </span><span class="no">Detailed description of the dataset</span>
+<span class="nt">contacts</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Contact Name</span>
+<span class="w">    </span><span class="nt">affiliation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Institution</span>
+<span class="w">    </span><span class="nt">email</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">contact@example.com</span>
+<span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">tag1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">tag2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">tag3</span><span class="p p-Indicator">]</span>
+<span class="nt">files</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">nodes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data/nodes.json</span>
+<span class="w">  </span><span class="nt">edges</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data/edges.json</span>
+<span class="w">  </span><span class="nt">probs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data/probs.json</span>
+<span class="nt">citation</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">  </span><span class="no">Citation information</span>
+</pre></div>
+</div>
+</section>
+<section id="loading-datasets">
+<h2>Loading Datasets<a class="headerlink" href="#loading-datasets" title="Link to this heading"></a></h2>
+<section id="using-ndtools">
+<h3>Using ndtools<a class="headerlink" href="#using-ndtools" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ndtools.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataset_paths</span><span class="p">,</span> <span class="n">load_json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1"># Get dataset paths</span>
+<span class="n">nodes_path</span><span class="p">,</span> <span class="n">edges_path</span><span class="p">,</span> <span class="n">probs_path</span> <span class="o">=</span> <span class="n">dataset_paths</span><span class="p">(</span>
+    <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">),</span> <span class="s1">&#39;dataset_name&#39;</span><span class="p">,</span> <span class="s1">&#39;v1&#39;</span>
+<span class="p">)</span>
+
+<span class="c1"># Load data</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="n">load_json</span><span class="p">(</span><span class="n">nodes_path</span><span class="p">)</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="n">load_json</span><span class="p">(</span><span class="n">edges_path</span><span class="p">)</span>
+<span class="n">probs</span> <span class="o">=</span> <span class="n">load_json</span><span class="p">(</span><span class="n">probs_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="direct-loading">
+<h3>Direct Loading<a class="headerlink" href="#direct-loading" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">dataset_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;dataset_name/v1/data&quot;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dataset_path</span> <span class="o">/</span> <span class="s2">&quot;nodes.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dataset_path</span> <span class="o">/</span> <span class="s2">&quot;edges.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">edges</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dataset_path</span> <span class="o">/</span> <span class="s2">&quot;probs.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">probs</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="validation">
+<h2>Validation<a class="headerlink" href="#validation" title="Link to this heading"></a></h2>
+<p>All datasets can be validated against their schemas:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Validate all datasets</span>
+python<span class="w"> </span>data_validate.py<span class="w"> </span>--root<span class="w"> </span>.
+
+<span class="c1"># Validate specific dataset</span>
+python<span class="w"> </span>data_validate.py<span class="w"> </span>--root<span class="w"> </span>.<span class="w"> </span>--dataset<span class="w"> </span>dataset-name
+</pre></div>
+</div>
+</section>
+<section id="adding-new-datasets">
+<h2>Adding New Datasets<a class="headerlink" href="#adding-new-datasets" title="Link to this heading"></a></h2>
+<p>To add a new dataset to the repository:</p>
+<ol class="arabic simple">
+<li><p>Create a new directory following the naming convention: <code class="docutils literal notranslate"><span class="pre">dataset_name/v1/</span></code> (⚠️ <strong>Don’t use hyphens (`-`)</strong> — use <strong>underscores (`_`)</strong> in dataset names.)</p></li>
+<li><p>Add your data files in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> subdirectory</p></li>
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">dataset.yaml</span></code> metadata file</p></li>
+<li><p>Update the <code class="docutils literal notranslate"><span class="pre">registry.json</span></code> file</p></li>
+<li><p>Validate your dataset using the provided validation tools</p></li>
+</ol>
+<p>See the <span class="xref std std-doc">contributing</span> page for detailed instructions.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="quickstart.html" class="btn btn-neutral float-left" title="Quick Start Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ndtools.html" class="btn btn-neutral float-right" title="ndtools Package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Network Datasets Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,191 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Network Datasets Documentation &mdash; Network Datasets 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Network Datasets
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Available Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ndtools.html">ndtools Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how%20to%20contribute.html">How to contribute</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Network Datasets</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Network Datasets Documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="network-datasets-documentation">
+<h1>Network Datasets Documentation<a class="headerlink" href="#network-datasets-documentation" title="Link to this heading"></a></h1>
+<p>This directory contains the Sphinx documentation for the Network Datasets project.</p>
+<section id="building-the-documentation">
+<h2>Building the Documentation<a class="headerlink" href="#building-the-documentation" title="Link to this heading"></a></h2>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h3>
+<p>Install the required dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+</section>
+<section id="build-commands">
+<h3>Build Commands<a class="headerlink" href="#build-commands" title="Link to this heading"></a></h3>
+<p><strong>HTML Documentation:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>html
+</pre></div>
+</div>
+<p><strong>Clean Build:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>clean
+make<span class="w"> </span>html
+</pre></div>
+</div>
+<p><strong>Windows:</strong></p>
+<div class="highlight-cmd notranslate"><div class="highlight"><pre><span></span>make.bat html
+</pre></div>
+</div>
+</section>
+<section id="viewing-the-documentation">
+<h3>Viewing the Documentation<a class="headerlink" href="#viewing-the-documentation" title="Link to this heading"></a></h3>
+<p>After building, open <code class="docutils literal notranslate"><span class="pre">_build/html/index.html</span></code> in your web browser to view the documentation.</p>
+</section>
+</section>
+<section id="documentation-structure">
+<h2>Documentation Structure<a class="headerlink" href="#documentation-structure" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">index.rst</span></code> - Main documentation page</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">installation.rst</span></code> - Installation instructions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">quickstart.rst</span></code> - Quick start guide</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">datasets.rst</span></code> - Available datasets</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ndtools.rst</span></code> - ndtools package documentation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">api.rst</span></code> - API reference</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">examples.rst</span></code> - Usage examples</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">contributing.rst</span></code> - Contribution guidelines</p></li>
+</ul>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+<p>The documentation is configured in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>. Key settings:</p>
+<ul class="simple">
+<li><p><strong>Theme</strong>: Read the Docs theme</p></li>
+<li><p><strong>Extensions</strong>: autodoc, napoleon, myst-parser</p></li>
+<li><p><strong>Source</strong>: RST and Markdown files</p></li>
+<li><p><strong>Output</strong>: HTML, PDF, and other formats</p></li>
+</ul>
+</section>
+<section id="adding-new-documentation">
+<h2>Adding New Documentation<a class="headerlink" href="#adding-new-documentation" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Create new <code class="docutils literal notranslate"><span class="pre">.rst</span></code> or <code class="docutils literal notranslate"><span class="pre">.md</span></code> files in this directory</p></li>
+<li><p>Add them to the table of contents in <code class="docutils literal notranslate"><span class="pre">index.rst</span></code></p></li>
+<li><p>Rebuild the documentation</p></li>
+<li><p>Check for any warnings or errors</p></li>
+</ol>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<p><strong>Import Errors:</strong></p>
+<ul class="simple">
+<li><p>Ensure the parent directory is in the Python path</p></li>
+<li><p>Check that all dependencies are installed</p></li>
+</ul>
+<p><strong>Build Errors:</strong></p>
+<ul class="simple">
+<li><p>Check for syntax errors in RST/Markdown files</p></li>
+<li><p>Verify that all referenced files exist</p></li>
+<li><p>Check the Sphinx build log for specific errors</p></li>
+</ul>
+<p><strong>Missing Modules:</strong></p>
+<ul class="simple">
+<li><p>Ensure the ndtools package is installed in development mode</p></li>
+<li><p>Check that all imports in the code are correct</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Network Datasets Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

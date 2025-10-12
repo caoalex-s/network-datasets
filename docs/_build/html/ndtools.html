@@ -1,0 +1,423 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ndtools Package &mdash; Network Datasets 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Examples" href="examples.html" />
+    <link rel="prev" title="Available Datasets" href="datasets.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Network Datasets
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Available Datasets</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ndtools Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#package-overview">Package Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#io-module">IO Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ndtools.io.load_json"><code class="docutils literal notranslate"><span class="pre">load_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ndtools.io.load_yaml"><code class="docutils literal notranslate"><span class="pre">load_yaml()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ndtools.io.dataset_paths"><code class="docutils literal notranslate"><span class="pre">dataset_paths()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#key-functions">Key Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-usage">Example Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#graphs-module">Graphs Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ndtools.graphs.build_graph"><code class="docutils literal notranslate"><span class="pre">build_graph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ndtools.graphs.draw_graph_from_data"><code class="docutils literal notranslate"><span class="pre">draw_graph_from_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ndtools.graphs.compute_edge_lengths"><code class="docutils literal notranslate"><span class="pre">compute_edge_lengths()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Key Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Example Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#binary-graph-functions-module">Binary Graph Functions Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ndtools.fun_binary_graph.eval_global_conn_k"><code class="docutils literal notranslate"><span class="pre">eval_global_conn_k()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ndtools.fun_binary_graph.eval_travel_time_to_nearest"><code class="docutils literal notranslate"><span class="pre">eval_travel_time_to_nearest()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Key Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Example Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#performance-notes">Performance Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how%20to%20contribute.html">How to contribute</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Network Datasets</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ndtools Package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ndtools.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ndtools-package">
+<h1>ndtools Package<a class="headerlink" href="#ndtools-package" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">ndtools</span></code> package provides utilities for loading, processing, and analysing network datasets. It consists of several modules, each serving a specific purpose in the network analysis workflow.</p>
+<section id="package-overview">
+<h2>Package Overview<a class="headerlink" href="#package-overview" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ndtools</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ndtools</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>  <span class="c1"># 0.1.0</span>
+</pre></div>
+</div>
+<p>The package is organised into the following modules:</p>
+<ul class="simple">
+<li><p><span class="xref std std-doc">ndtools.io</span> - Data loading and I/O utilities</p></li>
+<li><p><span class="xref std std-doc">ndtools.graphs</span> - Graph construction and visualization</p></li>
+<li><p><span class="xref std std-doc">ndtools.fun_binary_graph</span> - Evaluation of systems with binary-state components</p></li>
+</ul>
+</section>
+<section id="io-module">
+<h2>IO Module<a class="headerlink" href="#io-module" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">io</span></code> module provides functions for loading datasets and handling file I/O operations.</p>
+<dl class="py function" id="module-ndtools.io">
+<dt class="sig sig-object py" id="ndtools.io.load_json">
+<span class="sig-prename descclassname"><span class="pre">ndtools.io.</span></span><span class="sig-name descname"><span class="pre">load_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">Path</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ndtools/io.html#load_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ndtools.io.load_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ndtools.io.load_yaml">
+<span class="sig-prename descclassname"><span class="pre">ndtools.io.</span></span><span class="sig-name descname"><span class="pre">load_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">Path</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></span></span><a class="reference internal" href="_modules/ndtools/io.html#load_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ndtools.io.load_yaml" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ndtools.io.dataset_paths">
+<span class="sig-prename descclassname"><span class="pre">ndtools.io.</span></span><span class="sig-name descname"><span class="pre">dataset_paths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo_root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">Path</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'v1'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">Path</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">Path</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">Path</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ndtools/io.html#dataset_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ndtools.io.dataset_paths" title="Link to this definition"></a></dt>
+<dd><p>Return (nodes.json, edges.json, probs.json) for a given dataset folder.
+Works with your existing layout:</p>
+<blockquote>
+<div><p>repo_root/&lt;dataset&gt;/&lt;version&gt;/data/{nodes,edges,probs}.json</p>
+</div></blockquote>
+<p class="rubric">Example</p>
+<p>dataset_paths(Path(‘.’), ‘toynet-11edges’, ‘v1’)</p>
+</dd></dl>
+
+<section id="key-functions">
+<h3>Key Functions<a class="headerlink" href="#key-functions" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">load_json(path)</span></code></dt><dd><p>Load a JSON file and return its contents as a Python dictionary.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">load_yaml(path)</span></code></dt><dd><p>Load a YAML file and return its contents.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dataset_paths(repo_root,</span> <span class="pre">dataset,</span> <span class="pre">version)</span></code></dt><dd><p>Get the file paths for a specific dataset’s nodes, edges, and probabilities files.</p>
+</dd>
+</dl>
+</section>
+<section id="example-usage">
+<h3>Example Usage<a class="headerlink" href="#example-usage" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ndtools.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataset_paths</span><span class="p">,</span> <span class="n">load_json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1"># Get dataset file paths</span>
+<span class="n">nodes_path</span><span class="p">,</span> <span class="n">edges_path</span><span class="p">,</span> <span class="n">probs_path</span> <span class="o">=</span> <span class="n">dataset_paths</span><span class="p">(</span>
+    <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">),</span> <span class="s1">&#39;toynet-11edges&#39;</span><span class="p">,</span> <span class="s1">&#39;v1&#39;</span>
+<span class="p">)</span>
+
+<span class="c1"># Load the data</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="n">load_json</span><span class="p">(</span><span class="n">nodes_path</span><span class="p">)</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="n">load_json</span><span class="p">(</span><span class="n">edges_path</span><span class="p">)</span>
+<span class="n">probs</span> <span class="o">=</span> <span class="n">load_json</span><span class="p">(</span><span class="n">probs_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="graphs-module">
+<h2>Graphs Module<a class="headerlink" href="#graphs-module" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">graphs</span></code> module provides functions for constructing NetworkX graphs and visualizing networks.</p>
+<dl class="py function" id="module-ndtools.graphs">
+<dt class="sig sig-object py" id="ndtools.graphs.build_graph">
+<span class="sig-prename descclassname"><span class="pre">ndtools.graphs.</span></span><span class="sig-name descname"><span class="pre">build_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edges</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">probs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://networkx.org/documentation/stable/reference/classes/graph.html#networkx.Graph" title="(in NetworkX v3.5)"><span class="pre">Graph</span></a></span></span><a class="reference internal" href="_modules/ndtools/graphs.html#build_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ndtools.graphs.build_graph" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ndtools.graphs.draw_graph_from_data">
+<span class="sig-prename descclassname"><span class="pre">ndtools.graphs.</span></span><span class="sig-name descname"><span class="pre">draw_graph_from_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">Path</span></a></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'spring'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'skyblue'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gray'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_node_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_edge_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'graph.png'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">Path</span></a></span></span><a class="reference internal" href="_modules/ndtools/graphs.html#draw_graph_from_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ndtools.graphs.draw_graph_from_data" title="Link to this definition"></a></dt>
+<dd><p>Load nodes/edges from JSON files in <cite>data_dir</cite>, draw the graph, and save to the same dir.</p>
+<dl class="simple">
+<dt>Expects:</dt><dd><ul class="simple">
+<li><p>nodes.json : [{“id”: “A”, “attr1”: …, …}, …]</p></li>
+<li><p>edges.json : [{“source”: “A”, “target”: “B”, “eid”: “e1”, “attr2”: …, …}, …]</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dir</strong> – Directory containing nodes.json and edges.json.</p></li>
+<li><p><strong>layout</strong> – Layout algorithm (“spring”, “kamada_kawai”, “circular”, “shell”).</p></li>
+<li><p><strong>node_color</strong> – Color for nodes.</p></li>
+<li><p><strong>node_size</strong> – Node size in points^2.</p></li>
+<li><p><strong>edge_color</strong> – Color for edges.</p></li>
+<li><p><strong>with_node_labels</strong> – Whether to display node labels.</p></li>
+<li><p><strong>with_edge_labels</strong> – Whether to display edge labels (uses ‘eid’ if present).</p></li>
+<li><p><strong>title</strong> – Optional title for the plot.</p></li>
+<li><p><strong>layout_kwargs</strong> – Optional kwargs passed to the layout function.</p></li>
+<li><p><strong>output_name</strong> – Filename of the saved image (saved under data_dir).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Path to the saved image file.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Example usage:</dt><dd><p>draw_graph_from_data(“ema_highway/v1/data”)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ndtools.graphs.compute_edge_lengths">
+<span class="sig-prename descclassname"><span class="pre">ndtools.graphs.</span></span><span class="sig-name descname"><span class="pre">compute_edge_lengths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edges_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ndtools/graphs.html#compute_edge_lengths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ndtools.graphs.compute_edge_lengths" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Compute Euclidean length in km for each edge.</dt><dd><p>nodes_dict: {node_id: {“x”: float(km), “y”: float(km)}}
+edges_dict: {edge_id: {“from”: str, “to”: str, “directed”: bool}}</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float}</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>{edge_id</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="id1">
+<h3>Key Functions<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">build_graph(nodes,</span> <span class="pre">edges,</span> <span class="pre">probs)</span></code></dt><dd><p>Construct a NetworkX graph from node, edge, and probability data.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">draw_graph_from_data(data_dir,</span> <span class="pre">...)</span></code></dt><dd><p>Load data from files and create a visualization of the network.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">compute_edge_lengths(nodes_dict,</span> <span class="pre">edges_dict)</span></code></dt><dd><p>Calculate Euclidean distances for edges based on node coordinates.</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h3>Example Usage<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ndtools.graphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_graph</span><span class="p">,</span> <span class="n">draw_graph_from_data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ndtools.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataset_paths</span><span class="p">,</span> <span class="n">load_json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1"># Load data</span>
+<span class="n">nodes_path</span><span class="p">,</span> <span class="n">edges_path</span><span class="p">,</span> <span class="n">probs_path</span> <span class="o">=</span> <span class="n">dataset_paths</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">),</span> <span class="s1">&#39;toynet-11edges&#39;</span><span class="p">,</span> <span class="s1">&#39;v1&#39;</span><span class="p">)</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="n">load_json</span><span class="p">(</span><span class="n">nodes_path</span><span class="p">)</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="n">load_json</span><span class="p">(</span><span class="n">edges_path</span><span class="p">)</span>
+<span class="n">probs</span> <span class="o">=</span> <span class="n">load_json</span><span class="p">(</span><span class="n">probs_path</span><span class="p">)</span>
+
+<span class="c1"># Build graph</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">build_graph</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">probs</span><span class="p">)</span>
+
+<span class="c1"># Visualize</span>
+<span class="n">output_path</span> <span class="o">=</span> <span class="n">draw_graph_from_data</span><span class="p">(</span>
+    <span class="s2">&quot;toynet-11edges/v1/data&quot;</span><span class="p">,</span>
+    <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;spring&quot;</span><span class="p">,</span>
+    <span class="n">with_node_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Toy Network&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="binary-graph-functions-module">
+<h2>Binary Graph Functions Module<a class="headerlink" href="#binary-graph-functions-module" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">fun_binary_graph</span></code> module provides functions for evaluating performance of system events, given binary states of components.</p>
+<dl class="py function" id="module-ndtools.fun_binary_graph">
+<dt class="sig sig-object py" id="ndtools.fun_binary_graph.eval_global_conn_k">
+<span class="sig-prename descclassname"><span class="pre">ndtools.fun_binary_graph.</span></span><span class="sig-name descname"><span class="pre">eval_global_conn_k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comps_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://networkx.org/documentation/stable/reference/classes/graph.html#networkx.Graph" title="(in NetworkX v3.5)"><span class="pre">Graph</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ndtools/fun_binary_graph.html#eval_global_conn_k"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ndtools.fun_binary_graph.eval_global_conn_k" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Build subgraph H from G_base according to component states:</dt><dd><ul class="simple">
+<li><p>If comps_state[node_id] == 0: remove all edges incident to that node.</p></li>
+<li><p>Only include edges whose comps_state[eid] == 1.</p></li>
+<li><p>Nodes remain present; connectivity is determined by remaining edges.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(k_value, k_value, None)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ndtools.fun_binary_graph.eval_travel_time_to_nearest">
+<span class="sig-prename descclassname"><span class="pre">ndtools.fun_binary_graph.</span></span><span class="sig-name descname"><span class="pre">eval_travel_time_to_nearest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comps_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://networkx.org/documentation/stable/reference/classes/graph.html#networkx.Graph" title="(in NetworkX v3.5)"><span class="pre">Graph</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">destinations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.14)"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">avg_speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">60.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'length'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ndtools/fun_binary_graph.html#eval_travel_time_to_nearest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ndtools.fun_binary_graph.eval_travel_time_to_nearest" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<section id="id3">
+<h3>Key Functions<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">eval_global_conn_k(comps_state,</span> <span class="pre">G_base)</span></code></dt><dd><p>Evaluate global vertex connectivity of a network under component failures.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">eval_travel_time_to_nearest(comps_state,</span> <span class="pre">G_base,</span> <span class="pre">origin,</span> <span class="pre">destinations,</span> <span class="pre">...)</span></code></dt><dd><p>Evaluate travel time to the nearest destination under component failures.</p>
+</dd>
+</dl>
+</section>
+<section id="id4">
+<h3>Example Usage<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ndtools.fun_binary_graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">eval_global_conn_k</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ndtools.graphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_graph</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ndtools.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataset_paths</span><span class="p">,</span> <span class="n">load_json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1"># Load and build graph</span>
+<span class="n">nodes_path</span><span class="p">,</span> <span class="n">edges_path</span><span class="p">,</span> <span class="n">probs_path</span> <span class="o">=</span> <span class="n">dataset_paths</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">),</span> <span class="s1">&#39;toynet-11edges&#39;</span><span class="p">,</span> <span class="s1">&#39;v1&#39;</span><span class="p">)</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="n">load_json</span><span class="p">(</span><span class="n">nodes_path</span><span class="p">)</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="n">load_json</span><span class="p">(</span><span class="n">edges_path</span><span class="p">)</span>
+<span class="n">probs</span> <span class="o">=</span> <span class="n">load_json</span><span class="p">(</span><span class="n">probs_path</span><span class="p">)</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">build_graph</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">probs</span><span class="p">)</span>
+
+<span class="c1"># Define component states (1 = working, 0 = failed)</span>
+<span class="n">comps_state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;n1&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c1"># Node n1 is working</span>
+    <span class="s2">&quot;n2&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c1"># Node n2 is working</span>
+    <span class="s2">&quot;e1&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>  <span class="c1"># Edge e1 has failed</span>
+    <span class="s2">&quot;e2&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c1"># Edge e2 is working</span>
+<span class="p">}</span>
+
+<span class="c1"># Evaluate connectivity</span>
+<span class="n">k_value</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">eval_global_conn_k</span><span class="p">(</span><span class="n">comps_state</span><span class="p">,</span> <span class="n">G</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connectivity: </span><span class="si">{</span><span class="n">k_value</span><span class="si">}</span><span class="s2">, Status: </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h2>
+<p>The ndtools package requires the following dependencies:</p>
+<ul class="simple">
+<li><p><strong>networkx</strong> (&gt;=3.0): Graph analysis and manipulation</p></li>
+<li><p><strong>pyyaml</strong> (&gt;=6.0): YAML file parsing</p></li>
+<li><p><strong>jsonschema</strong> (&gt;=4.0): JSON schema validation</p></li>
+</ul>
+<p>Optional dependencies:</p>
+<ul class="simple">
+<li><p><strong>matplotlib</strong> (&gt;=3.0): For graph visualization functions</p></li>
+</ul>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h3>
+<p>Install the package and its dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Or install with optional visualization dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[viz]&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>Run the test suite to verify functionality:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>tests/
+</pre></div>
+</div>
+<p>The test suite includes:</p>
+<ul class="simple">
+<li><p>Unit tests for all major functions</p></li>
+<li><p>Integration tests for complete workflows</p></li>
+<li><p>Data validation tests</p></li>
+</ul>
+</section>
+<section id="performance-notes">
+<h2>Performance Notes<a class="headerlink" href="#performance-notes" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Graph construction is optimized for large networks</p></li>
+<li><p>Visualisation functions use efficient layout algorithms</p></li>
+<li><p>System function evaluation supports both directed and undirected graphs</p></li>
+<li><p>Memory usage scales linearly with network size</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="datasets.html" class="btn btn-neutral float-left" title="Available Datasets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Network Datasets Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

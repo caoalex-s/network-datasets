@@ -1,0 +1,395 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ndtools.fun_binary_graph &mdash; Network Datasets 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Network Datasets
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Available Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ndtools.html">ndtools Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how%20to%20contribute.html">How to contribute</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Network Datasets</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ndtools.fun_binary_graph</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ndtools.fun_binary_graph</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_pairwise</span><span class="p">(</span><span class="n">seq</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">seq</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">seq</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_edge_ids_on_path</span><span class="p">(</span><span class="n">G</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">,</span> <span class="n">node_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return [eid1, eid2, ...] along the node_path; None if no path or eid missing.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">node_path</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">is_multi</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">MultiGraph</span><span class="p">,</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">))</span>
+    <span class="n">eids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">_pairwise</span><span class="p">(</span><span class="n">node_path</span><span class="p">):</span>
+        <span class="n">eid</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">is_multi</span><span class="p">:</span>
+            <span class="n">data_dict</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">get_edge_data</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>  <span class="c1"># {key: attrdict}</span>
+            <span class="k">if</span> <span class="n">data_dict</span><span class="p">:</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">data_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+                <span class="n">eid</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;eid&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">get_edge_data</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">d</span><span class="p">:</span>
+                <span class="n">eid</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;eid&quot;</span><span class="p">)</span>
+        <span class="n">eids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eid</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">eids</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_node_edge_chain</span><span class="p">(</span><span class="n">G</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">,</span> <span class="n">node_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;[&#39;n1&#39;,&#39;n3&#39;,&#39;n6&#39;] -&gt; [&#39;n1&#39;, eid(n1,n3), &#39;n3&#39;, eid(n3,n6), &#39;n6&#39;] (uses &#39;eid&#39;, falls back to &#39;u-&gt;v&#39;).&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">node_path</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">chain</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">node_path</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="n">is_multi</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">MultiGraph</span><span class="p">,</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">_pairwise</span><span class="p">(</span><span class="n">node_path</span><span class="p">):</span>
+        <span class="n">eid</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">is_multi</span><span class="p">:</span>
+            <span class="n">data_dict</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">get_edge_data</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">data_dict</span><span class="p">:</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">data_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+                <span class="n">eid</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;eid&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">get_edge_data</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">d</span><span class="p">:</span>
+                <span class="n">eid</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;eid&quot;</span><span class="p">)</span>
+        <span class="n">chain</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eid</span> <span class="k">if</span> <span class="n">eid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">u</span><span class="si">}</span><span class="s2">-&gt;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">chain</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">chain</span>
+
+
+
+<div class="viewcode-block" id="eval_global_conn_k">
+<a class="viewcode-back" href="../../ndtools.html#ndtools.fun_binary_graph.eval_global_conn_k">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">eval_global_conn_k</span><span class="p">(</span>
+    <span class="n">comps_state</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="n">G_base</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Build subgraph H from G_base according to component states:</span>
+<span class="sd">      - If comps_state[node_id] == 0: remove all edges incident to that node.</span>
+<span class="sd">      - Only include edges whose comps_state[eid] == 1.</span>
+<span class="sd">      - Nodes remain present; connectivity is determined by remaining edges.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (k_value, k_value, None)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Collect node-off set and the set of edge IDs marked on/off</span>
+    <span class="n">node_off</span> <span class="o">=</span> <span class="p">{</span><span class="n">cid</span> <span class="k">for</span> <span class="n">cid</span><span class="p">,</span> <span class="n">st</span> <span class="ow">in</span> <span class="n">comps_state</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">st</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">cid</span> <span class="ow">in</span> <span class="n">G_base</span><span class="o">.</span><span class="n">nodes</span><span class="p">}</span>
+    <span class="n">edge_on</span>  <span class="o">=</span> <span class="p">{</span><span class="n">cid</span> <span class="k">for</span> <span class="n">cid</span><span class="p">,</span> <span class="n">st</span> <span class="ow">in</span> <span class="n">comps_state</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">st</span> <span class="o">==</span> <span class="mi">1</span><span class="p">}</span>  <span class="c1"># keep only these edges</span>
+    <span class="c1"># (unknown IDs in comps_state are ignored)</span>
+
+    <span class="c1"># Build subgraph</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+    <span class="n">H</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">G_base</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">G_base</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">eid</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;eid&quot;</span><span class="p">)</span>
+        <span class="c1"># skip if incident to a node that&#39;s off</span>
+        <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">node_off</span> <span class="ow">or</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">node_off</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="c1"># include only edges explicitly set to 1</span>
+        <span class="k">if</span> <span class="n">eid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">eid</span> <span class="ow">in</span> <span class="n">edge_on</span><span class="p">:</span>
+            <span class="n">H</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="c1"># Compute global vertex connectivity</span>
+    <span class="n">k_val</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">node_connectivity</span><span class="p">(</span><span class="n">H</span><span class="p">)</span> <span class="k">if</span> <span class="n">H</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">k_val</span><span class="p">,</span> <span class="n">k_val</span><span class="p">,</span> <span class="kc">None</span></div>
+
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+
+<div class="viewcode-block" id="_pairwise">
+<a class="viewcode-back" href="../../api.html#ndtools.fun_binary_graph._pairwise">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">_pairwise</span><span class="p">(</span><span class="n">seq</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">seq</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">seq</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="_edge_ids_on_path">
+<a class="viewcode-back" href="../../api.html#ndtools.fun_binary_graph._edge_ids_on_path">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">_edge_ids_on_path</span><span class="p">(</span><span class="n">G</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">,</span> <span class="n">node_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return [eid1, eid2, ...] along the node_path; None if no path or eid missing.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">node_path</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">is_multi</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">MultiGraph</span><span class="p">,</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">))</span>
+    <span class="n">eids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">_pairwise</span><span class="p">(</span><span class="n">node_path</span><span class="p">):</span>
+        <span class="n">eid</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">is_multi</span><span class="p">:</span>
+            <span class="n">data_dict</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">get_edge_data</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>  <span class="c1"># {key: attrdict}</span>
+            <span class="k">if</span> <span class="n">data_dict</span><span class="p">:</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">data_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+                <span class="n">eid</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;eid&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">get_edge_data</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">d</span><span class="p">:</span>
+                <span class="n">eid</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;eid&quot;</span><span class="p">)</span>
+        <span class="n">eids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eid</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">eids</span></div>
+
+
+<div class="viewcode-block" id="_node_edge_chain">
+<a class="viewcode-back" href="../../api.html#ndtools.fun_binary_graph._node_edge_chain">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">_node_edge_chain</span><span class="p">(</span><span class="n">G</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">,</span> <span class="n">node_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;[&#39;n1&#39;,&#39;n3&#39;,&#39;n6&#39;] -&gt; [&#39;n1&#39;, eid(n1,n3), &#39;n3&#39;, eid(n3,n6), &#39;n6&#39;] (uses &#39;eid&#39;, falls back to &#39;u-&gt;v&#39;).&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">node_path</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">chain</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">node_path</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="n">is_multi</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">MultiGraph</span><span class="p">,</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">_pairwise</span><span class="p">(</span><span class="n">node_path</span><span class="p">):</span>
+        <span class="n">eid</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">is_multi</span><span class="p">:</span>
+            <span class="n">data_dict</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">get_edge_data</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">data_dict</span><span class="p">:</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">data_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+                <span class="n">eid</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;eid&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">get_edge_data</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">d</span><span class="p">:</span>
+                <span class="n">eid</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;eid&quot;</span><span class="p">)</span>
+        <span class="n">chain</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eid</span> <span class="k">if</span> <span class="n">eid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">u</span><span class="si">}</span><span class="s2">-&gt;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">chain</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">chain</span></div>
+
+
+<div class="viewcode-block" id="eval_travel_time_to_nearest">
+<a class="viewcode-back" href="../../ndtools.html#ndtools.fun_binary_graph.eval_travel_time_to_nearest">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">eval_travel_time_to_nearest</span><span class="p">(</span>
+    <span class="n">comps_state</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="n">G_base</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">,</span>
+    <span class="n">origin</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">destinations</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">avg_speed</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">60.0</span><span class="p">,</span>        <span class="c1"># distance units per hour (e.g., km/h)</span>
+    <span class="n">target_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>        <span class="c1"># allowed extra time over baseline, in HOURS</span>
+    <span class="n">length_attr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;length&quot;</span><span class="p">,</span>    <span class="c1"># edge length attribute (e.g., km)</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+    <span class="n">dest_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">destinations</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">dest_set</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;no destinations provided&quot;</span><span class="p">}</span>
+
+    <span class="c1"># ----- Baseline graph (all edges that have length_attr) -----</span>
+    <span class="n">Hb</span> <span class="o">=</span> <span class="n">G_base</span><span class="o">.</span><span class="vm">__class__</span><span class="p">()</span>
+    <span class="n">Hb</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">G_base</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">G_base</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">length_attr</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">and</span> <span class="n">data</span><span class="p">[</span><span class="n">length_attr</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">Hb</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">Hb</span><span class="o">.</span><span class="n">has_node</span><span class="p">(</span><span class="n">origin</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;origin_missing_in_baseline&quot;</span><span class="p">}</span>
+
+    <span class="n">cand_b</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dest_set</span> <span class="k">if</span> <span class="n">Hb</span><span class="o">.</span><span class="n">has_node</span><span class="p">(</span><span class="n">d</span><span class="p">)]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">cand_b</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;no_destinations_in_baseline&quot;</span><span class="p">}</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">dist_b_map</span><span class="p">,</span> <span class="n">paths_b</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">single_source_dijkstra</span><span class="p">(</span><span class="n">Hb</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">origin</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">length_attr</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">nx</span><span class="o">.</span><span class="n">NetworkXNoPath</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;no_baseline_path&quot;</span><span class="p">}</span>
+
+    <span class="n">reach_b</span> <span class="o">=</span> <span class="p">[(</span><span class="n">d</span><span class="p">,</span> <span class="n">dist_b_map</span><span class="p">[</span><span class="n">d</span><span class="p">])</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">cand_b</span> <span class="k">if</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dist_b_map</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">reach_b</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;no_baseline_destination_reachable&quot;</span><span class="p">}</span>
+
+    <span class="n">dest_b</span><span class="p">,</span> <span class="n">dist_b</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">reach_b</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">time_b</span> <span class="o">=</span> <span class="n">dist_b</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">avg_speed</span><span class="p">)</span>  <span class="c1"># hours</span>
+    <span class="n">path_b_nodes</span> <span class="o">=</span> <span class="n">paths_b</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dest_b</span><span class="p">)</span>
+    <span class="n">path_b_chain</span> <span class="o">=</span> <span class="n">_node_edge_chain</span><span class="p">(</span><span class="n">Hb</span><span class="p">,</span> <span class="n">path_b_nodes</span><span class="p">)</span>
+    <span class="n">path_b_edges</span> <span class="o">=</span> <span class="n">_edge_ids_on_path</span><span class="p">(</span><span class="n">Hb</span><span class="p">,</span> <span class="n">path_b_nodes</span><span class="p">)</span>
+
+    <span class="c1"># ----- Filtered graph (apply comps_state) -----</span>
+    <span class="n">node_off</span> <span class="o">=</span> <span class="p">{</span><span class="n">cid</span> <span class="k">for</span> <span class="n">cid</span><span class="p">,</span> <span class="n">st</span> <span class="ow">in</span> <span class="n">comps_state</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">st</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">cid</span> <span class="ow">in</span> <span class="n">G_base</span><span class="o">.</span><span class="n">nodes</span><span class="p">}</span>
+    <span class="n">edge_on</span>  <span class="o">=</span> <span class="p">{</span><span class="n">cid</span> <span class="k">for</span> <span class="n">cid</span><span class="p">,</span> <span class="n">st</span> <span class="ow">in</span> <span class="n">comps_state</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">st</span> <span class="o">==</span> <span class="mi">1</span><span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">origin</span> <span class="ow">in</span> <span class="n">node_off</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;origin_off&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_time_hours&quot;</span><span class="p">:</span> <span class="n">time_b</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_path_nodes&quot;</span><span class="p">:</span> <span class="n">path_b_nodes</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_path_edges&quot;</span><span class="p">:</span> <span class="n">path_b_edges</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_path_chain&quot;</span><span class="p">:</span> <span class="n">path_b_chain</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="n">H</span> <span class="o">=</span> <span class="n">G_base</span><span class="o">.</span><span class="vm">__class__</span><span class="p">()</span>
+    <span class="n">H</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">G_base</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">G_base</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">node_off</span> <span class="ow">or</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">node_off</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">eid</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;eid&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">eid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">eid</span> <span class="ow">in</span> <span class="n">edge_on</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">length_attr</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">and</span> <span class="n">data</span><span class="p">[</span><span class="n">length_attr</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">H</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">H</span><span class="o">.</span><span class="n">has_node</span><span class="p">(</span><span class="n">origin</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;origin_missing_in_filtered&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_time_hours&quot;</span><span class="p">:</span> <span class="n">time_b</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_path_nodes&quot;</span><span class="p">:</span> <span class="n">path_b_nodes</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_path_edges&quot;</span><span class="p">:</span> <span class="n">path_b_edges</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_path_chain&quot;</span><span class="p">:</span> <span class="n">path_b_chain</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="n">cand_f</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dest_set</span> <span class="k">if</span> <span class="n">H</span><span class="o">.</span><span class="n">has_node</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">and</span> <span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">node_off</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">cand_f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;no_destinations_in_filtered&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_time_hours&quot;</span><span class="p">:</span> <span class="n">time_b</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_path_nodes&quot;</span><span class="p">:</span> <span class="n">path_b_nodes</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_path_edges&quot;</span><span class="p">:</span> <span class="n">path_b_edges</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_path_chain&quot;</span><span class="p">:</span> <span class="n">path_b_chain</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">dist_f_map</span><span class="p">,</span> <span class="n">paths_f</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">single_source_dijkstra</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">origin</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">length_attr</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">nx</span><span class="o">.</span><span class="n">NetworkXNoPath</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;no_path_filtered&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_time_hours&quot;</span><span class="p">:</span> <span class="n">time_b</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_path_nodes&quot;</span><span class="p">:</span> <span class="n">path_b_nodes</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_path_edges&quot;</span><span class="p">:</span> <span class="n">path_b_edges</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_path_chain&quot;</span><span class="p">:</span> <span class="n">path_b_chain</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="n">reach_f</span> <span class="o">=</span> <span class="p">[(</span><span class="n">d</span><span class="p">,</span> <span class="n">dist_f_map</span><span class="p">[</span><span class="n">d</span><span class="p">])</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">cand_f</span> <span class="k">if</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dist_f_map</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">reach_f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;no_destination_reachable_filtered&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_time_hours&quot;</span><span class="p">:</span> <span class="n">time_b</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_path_nodes&quot;</span><span class="p">:</span> <span class="n">path_b_nodes</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_path_edges&quot;</span><span class="p">:</span> <span class="n">path_b_edges</span><span class="p">,</span>
+            <span class="s2">&quot;baseline_path_chain&quot;</span><span class="p">:</span> <span class="n">path_b_chain</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="n">dest_f</span><span class="p">,</span> <span class="n">dist_f</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">reach_f</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">time_f</span> <span class="o">=</span> <span class="n">dist_f</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">avg_speed</span><span class="p">)</span>  <span class="c1"># hours</span>
+    <span class="n">path_f_nodes</span> <span class="o">=</span> <span class="n">paths_f</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dest_f</span><span class="p">)</span>
+    <span class="n">path_f_chain</span> <span class="o">=</span> <span class="n">_node_edge_chain</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">path_f_nodes</span><span class="p">)</span>
+    <span class="n">path_f_edges</span> <span class="o">=</span> <span class="n">_edge_ids_on_path</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">path_f_nodes</span><span class="p">)</span>
+
+    <span class="c1"># ----- Threshold check -----</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">target_max</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="n">target_max</span> <span class="o">=</span> <span class="p">[</span><span class="n">target_max</span><span class="p">]</span>
+    <span class="n">time_threshold</span> <span class="o">=</span> <span class="p">[</span><span class="n">time_b</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">tm</span><span class="p">)</span> <span class="k">for</span> <span class="n">tm</span> <span class="ow">in</span> <span class="n">target_max</span><span class="p">]</span>
+
+    <span class="n">sys_st</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">time_threshold</span><span class="p">)</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">time_f</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_threshold</span><span class="p">))</span>
+
+    <span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="c1"># filtered</span>
+        <span class="s2">&quot;dest_reached&quot;</span><span class="p">:</span> <span class="n">dest_f</span><span class="p">,</span>
+        <span class="s2">&quot;dist_filtered&quot;</span><span class="p">:</span> <span class="n">dist_f</span><span class="p">,</span>
+        <span class="s2">&quot;time_filtered_hours&quot;</span><span class="p">:</span> <span class="n">time_f</span><span class="p">,</span>
+        <span class="s2">&quot;path_filtered_nodes&quot;</span><span class="p">:</span> <span class="n">path_f_nodes</span><span class="p">,</span>
+        <span class="s2">&quot;path_filtered_edges&quot;</span><span class="p">:</span> <span class="n">path_f_edges</span><span class="p">,</span>  
+        <span class="s2">&quot;path_filtered_chain&quot;</span><span class="p">:</span> <span class="n">path_f_chain</span><span class="p">,</span>
+        <span class="c1"># baseline</span>
+        <span class="s2">&quot;baseline_dest&quot;</span><span class="p">:</span> <span class="n">dest_b</span><span class="p">,</span>
+        <span class="s2">&quot;baseline_dist&quot;</span><span class="p">:</span> <span class="n">dist_b</span><span class="p">,</span>
+        <span class="s2">&quot;baseline_time_hours&quot;</span><span class="p">:</span> <span class="n">time_b</span><span class="p">,</span>
+        <span class="s2">&quot;baseline_path_nodes&quot;</span><span class="p">:</span> <span class="n">path_b_nodes</span><span class="p">,</span>
+        <span class="s2">&quot;baseline_path_edges&quot;</span><span class="p">:</span> <span class="n">path_b_edges</span><span class="p">,</span>   
+        <span class="s2">&quot;baseline_path_chain&quot;</span><span class="p">:</span> <span class="n">path_b_chain</span><span class="p">,</span>
+        <span class="c1"># params</span>
+        <span class="s2">&quot;avg_speed_per_hour&quot;</span><span class="p">:</span> <span class="n">avg_speed</span><span class="p">,</span>
+        <span class="s2">&quot;allowed_extra_time_hours&quot;</span><span class="p">:</span> <span class="n">target_max</span><span class="p">,</span>
+        <span class="s2">&quot;time_threshold_hours&quot;</span><span class="p">:</span> <span class="n">time_threshold</span><span class="p">,</span>
+        <span class="s2">&quot;reached_any&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">time_f</span><span class="p">,</span> <span class="n">sys_st</span><span class="p">,</span> <span class="n">info</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Network Datasets Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
