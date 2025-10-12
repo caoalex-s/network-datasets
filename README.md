@@ -50,12 +50,14 @@ pytest -q
 
 ## Documentation
 
-📚 **Comprehensive documentation** is available at: [https://your-username.github.io/network-datasets/](https://your-username.github.io/network-datasets/)
+📚 **Comprehensive documentation** is available at: [https://jieunbyun.github.io/network-datasets/](https://jieunbyun.github.io/network-datasets/)
 
 The documentation includes:
+- **Overview** - Introduction to the repository and its purpose
+- **Installation Instructions** - Creating a Python environment and pip-installing ndtools
 - **Quick Start Guide** - Get up and running in minutes
 - **Available Datasets** - Detailed information about each dataset
-- **API Reference** - Complete documentation of the ndtools package
+- **ndtools Pacakage** - Complete documentation of the ndtools package
 - **Examples** - Jupyter notebooks and code examples
 - **Contributing Guide** - How to add new datasets and contribute
 
