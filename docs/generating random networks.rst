@@ -235,4 +235,4 @@ You can call the generator from Python:
 Acknowledgments
 ===============
 
-The network generator extensions were drafted by **`Alex Sixie Cao <https://scholar.google.com/citations?user=QUu8BdEAAAAJ&hl=en>`_**.
+The network generator extensions were drafted by `**Alex Sixie Cao** <https://scholar.google.com/citations?user=QUu8BdEAAAAJ&hl=en>`__.
