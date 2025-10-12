@@ -1,0 +1,8 @@
+# Sphinx build directory
+docs/_build/
+
+# Optional: editor and cache files
+*.pyc
+__pycache__/
+.DS_Store
+Thumbs.db
