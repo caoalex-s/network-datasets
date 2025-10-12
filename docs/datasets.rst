@@ -64,6 +64,53 @@ Eastern Massachusetts benchmark highway network with nodes, edges, and probabili
 * Connectivity between communities
 * Emergency response planning
 
+Generated Example Collection
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``generated/`` directory contains **synthetic example datasets** produced with
+``ndtools.network_generator``. These examples are intended for tutorials, quick tests,
+and format demonstrations. They follow the same JSON schemas as all curated datasets.
+
+.. note::
+   See :file:`generated/README.md` for an overview, and :file:`generated/PROVENANCE.md`
+   for the exact commands and parameters used to generate each example.
+
+**Layout**
+
+Each example resides in its own subdirectory with versioning:
+
+.. code-block:: text
+
+   generated/
+     grid_8x8/
+       v1/data/{nodes.json, edges.json, probs.json, graph.png}
+     er_60_p005/
+       v1/data/{...}
+     ws_n60_k6_b015/
+       v1/data/{...}
+     ba_n60_m3/
+       v1/data/{...}
+     rg_n60_r017/
+       v1/data/{...}
+     config_n60_deg3/
+       v1/data/{...}
+     README.md
+     PROVENANCE.md
+     CHANGELOG.md
+
+**What’s inside each example**
+
+- :file:`nodes.json` — map of node id → attributes (at minimum: ``x``, ``y``)
+- :file:`edges.json` — map of edge id → ``{from, to, directed, ...}``
+- :file:`probs.json` — per-edge binary probabilities (e.g., ``"0"``=failure, ``"1"``=working)
+- :file:`graph.png` — (optional) auto-rendered preview
+
+**Reproducibility & provenance**
+
+Each example’s parameters (model family, size, probabilities, seed, etc.) are recorded in
+:file:`generated/metadata.json` inside the dataset folder and summarized across the collection in
+:file:`generated/PROVENANCE.md`. Regenerate or extend the collection via the CLI examples shown there.
+
 distribution-substation-liang2022
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
