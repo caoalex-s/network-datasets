@@ -88,6 +88,7 @@ License
    quickstart
    datasets
    ndtools
+   generating random networks
    examples
    how to contribute
    contributors
