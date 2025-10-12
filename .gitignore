@@ -6,3 +6,5 @@ docs/_build/
 __pycache__/
 .DS_Store
 Thumbs.db
+/pytest_cache/
+.vscode/
