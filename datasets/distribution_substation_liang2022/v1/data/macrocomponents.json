@@ -1,0 +1,72 @@
+{
+    "M_Line220": {
+        "equipment_number": {
+            "PF": 1,
+            "VT220": 1,
+            "DSH220": 3,
+            "CT220": 3,
+            "CB220": 3
+        }
+    },
+    "M_DS220": {
+        "equipment_number": {
+            "DSV220": 3
+        }
+    },
+    "M_Bus220": {
+        "equipment_number": {
+            "PI220": 12,
+            "BT": 3
+        }
+    },
+    "M_BC220": {
+        "equipment_number": {
+            "PF": 2,
+            "DSH220": 3,
+            "DSV220": 3,
+            "CT220": 3,
+            "CB220": 3
+        }
+    },
+    "M_TF": {
+        "equipment_number": {
+            "PF": 5,
+            "DSH220": 3,
+            "CT220": 3,
+            "CB220": 3,
+            "DSH110": 3,
+            "CT110": 3,
+            "CB110": 3,
+            "TF": 1
+        }
+    },
+    "M_BC110": {
+        "equipment_number": {
+            "PF": 2,
+            "DSH110": 3,
+            "DSV110": 3,
+            "CT110": 3,
+            "CB110": 3
+        }
+    },
+    "M_Bus110": {
+        "equipment_number": {
+            "PI110": 18,
+            "BT": 3
+        }
+    },
+    "M_DS110": {
+        "equipment_number": {
+            "DSV110": 3
+        }
+    },
+    "M_Line110": {
+        "equipment_number": {
+            "PF": 1,
+            "VT110": 1,
+            "DSH110": 3,
+            "CT110": 3,
+            "CB110": 3
+        }
+    }
+}

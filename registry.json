@@ -2,28 +2,28 @@
   {
     "name": "toynet-11edges",
     "version": "1.0.0",
-    "path": "toynet-11edges/v1",
+    "path": "datasets/toynet-11edges/v1",
     "summary": "A small toy network with 8 nodes and 11 edges, useful for testing.",
     "license": "CC-BY-4.0"
   },
   {
     "name": "distribution-substation-liang2022",
     "version": "1.0.0",
-    "path": "distribution-substation-liang2022/v1",
+    "path": "datasets/distribution-substation-liang2022/v1",
     "summary": "Example 110/220 kV distribution substation network (Liang 2022) with nodes, edges, macrocomponents, equipment fragility, and probability file.",
     "license": "CC-BY-4.0"
   },
   {
     "name": "ema-highway",
     "version": "1.0.0",
-    "path": "ema-highway/v1",
+    "path": "datasets/ema-highway/v1",
     "summary": "Eastern Massachusetts benchmark highway network with nodes, edges, and probability file.",
     "license": "CC-BY-4.0"
   },
   {
     "name": "generated-examples",
     "version": "1.0.0",
-    "path": "generated",
+    "path": "datasets/generated-examples/v1",
     "summary": "Collection of synthetic example datasets generated with ndtools.network_generator. See generated/README.md and PROVENANCE.md for details.",
     "license": "CC-BY-4.0"
   }  

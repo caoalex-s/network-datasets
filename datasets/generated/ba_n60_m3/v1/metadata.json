@@ -1,0 +1,14 @@
+{
+  "name": "ba_n60_m3",
+  "version": "v1",
+  "description": "Barabasi-Albert, n=60, m=3 (~174 edges)",
+  "generator": {
+    "type": "ba",
+    "params": {
+      "n_nodes": 60,
+      "m": 3,
+      "p_fail": 0.1,
+      "seed": 7
+    }
+  }
+}

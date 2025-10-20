@@ -51,6 +51,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#current-datasets">Current Datasets</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#toynet-11edges">toynet-11edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ema-highway">ema-highway</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generated-example-collection">Generated Example Collection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#distribution-substation-liang2022">distribution-substation-liang2022</a></li>
 </ul>
 </li>
@@ -71,8 +72,10 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="ndtools.html">ndtools Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generating%20random%20networks.html">Random Network Generator (ndtools)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="how%20to%20contribute.html">How to contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributors.html">Contributors</a></li>
 </ul>
 
         </div>
@@ -120,7 +123,7 @@
 <ul class="simple">
 <li><p><strong>Version</strong>: 1.0.0</p></li>
 <li><p><strong>License</strong>: CC-BY-4.0</p></li>
-<li><p><strong>Path</strong>: <code class="docutils literal notranslate"><span class="pre">toynet-11edges/v1</span></code></p></li>
+<li><p><strong>Path</strong>: <code class="docutils literal notranslate"><span class="pre">datasets/toynet-11edges/v1</span></code></p></li>
 </ul>
 <p>A small toy network with 8 nodes and 11 edges, designed for testing and learning purposes.</p>
 <p><strong>Files</strong>:</p>
@@ -141,7 +144,7 @@
 <ul class="simple">
 <li><p><strong>Version</strong>: 1.0.0</p></li>
 <li><p><strong>License</strong>: CC-BY-4.0</p></li>
-<li><p><strong>Path</strong>: <code class="docutils literal notranslate"><span class="pre">ema-highway/v1</span></code></p></li>
+<li><p><strong>Path</strong>: <code class="docutils literal notranslate"><span class="pre">datasets/ema-highway/v1</span></code></p></li>
 </ul>
 <p>Eastern Massachusetts benchmark highway network with nodes, edges, and probability files.</p>
 <p><strong>Files</strong>:</p>
@@ -163,12 +166,54 @@
 <li><p>Emergency response planning</p></li>
 </ul>
 </section>
+<section id="generated-example-collection">
+<h3>Generated Example Collection<a class="headerlink" href="#generated-example-collection" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">datasets/generated/</span></code> directory contains <strong>synthetic example datasets</strong> produced with
+<code class="docutils literal notranslate"><span class="pre">ndtools.network_generator</span></code>. These examples are intended for tutorials, quick tests,
+and format demonstrations. They follow the same JSON schemas as all curated datasets.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See <code class="file docutils literal notranslate"><span class="pre">datasets/generated/README.md</span></code> for an overview, and <code class="file docutils literal notranslate"><span class="pre">datasets/generated/PROVENANCE.md</span></code>
+for the exact commands and parameters used to generate each example.</p>
+</div>
+<p><strong>Layout</strong></p>
+<p>Each example resides in its own subdirectory with versioning:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>generated/
+  grid_8x8/
+    v1/data/{nodes.json, edges.json, probs.json, graph.png}
+  er_60_p005/
+    v1/data/{...}
+  ws_n60_k6_b015/
+    v1/data/{...}
+  ba_n60_m3/
+    v1/data/{...}
+  rg_n60_r017/
+    v1/data/{...}
+  config_n60_deg3/
+    v1/data/{...}
+  README.md
+  PROVENANCE.md
+  CHANGELOG.md
+</pre></div>
+</div>
+<p><strong>What’s inside each example</strong></p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">nodes.json</span></code> — map of node id → attributes (at minimum: <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>)</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">edges.json</span></code> — map of edge id → <code class="docutils literal notranslate"><span class="pre">{from,</span> <span class="pre">to,</span> <span class="pre">directed,</span> <span class="pre">...}</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">probs.json</span></code> — per-edge binary probabilities (e.g., <a href="#id1"><span class="problematic" id="id2">``</span></a>”0”<a href="#id3"><span class="problematic" id="id4">``</span></a>=failure, <a href="#id5"><span class="problematic" id="id6">``</span></a>”1”<a href="#id7"><span class="problematic" id="id8">``</span></a>=working)</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">graph.png</span></code> — (optional) auto-rendered preview</p></li>
+</ul>
+<p><strong>Reproducibility &amp; provenance</strong></p>
+<p>Each example’s parameters (model family, size, probabilities, seed, etc.) are recorded in
+<code class="file docutils literal notranslate"><span class="pre">generated/metadata.json</span></code> inside the dataset folder and summarized across the collection in
+<code class="file docutils literal notranslate"><span class="pre">generated/PROVENANCE.md</span></code>. Regenerate or extend the collection via the CLI examples shown there.</p>
+</section>
 <section id="distribution-substation-liang2022">
 <h3>distribution-substation-liang2022<a class="headerlink" href="#distribution-substation-liang2022" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><strong>Version</strong>: 1.0.0</p></li>
 <li><p><strong>License</strong>: CC-BY-4.0</p></li>
-<li><p><strong>Path</strong>: <code class="docutils literal notranslate"><span class="pre">distribution-substation-liang2022/v1</span></code></p></li>
+<li><p><strong>Path</strong>: <code class="docutils literal notranslate"><span class="pre">datasets/distribution-substation-liang2022/v1</span></code></p></li>
 </ul>
 <p>Example 110/220 kV distribution substation network based on Liang et al. (2022). Includes nodes, edges, macrocomponents, equipment fragility, and probability files.</p>
 <p><strong>Files</strong>:</p>
@@ -259,7 +304,7 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Where, for example, <a href="#id1"><span class="problematic" id="id2">``</span></a>”1”` indicates the edge could imply active/working and <a href="#id3"><span class="problematic" id="id4">``</span></a>”0”` failure.</p>
+<p>Where, for example, <a href="#id9"><span class="problematic" id="id10">``</span></a>”1”` indicates the edge could imply active/working and <a href="#id11"><span class="problematic" id="id12">``</span></a>”0”` failure.</p>
 <p><strong>Required attributes</strong>:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: Integer state index starting from 0</p></li>
@@ -303,7 +348,7 @@
 
 <span class="c1"># Get dataset paths</span>
 <span class="n">nodes_path</span><span class="p">,</span> <span class="n">edges_path</span><span class="p">,</span> <span class="n">probs_path</span> <span class="o">=</span> <span class="n">dataset_paths</span><span class="p">(</span>
-    <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">),</span> <span class="s1">&#39;dataset_name&#39;</span><span class="p">,</span> <span class="s1">&#39;v1&#39;</span>
+    <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;datasets&#39;</span><span class="p">),</span> <span class="s1">&#39;dataset_name&#39;</span><span class="p">,</span> <span class="s1">&#39;v1&#39;</span>
 <span class="p">)</span>
 
 <span class="c1"># Load data</span>
@@ -318,7 +363,7 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
-<span class="n">dataset_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;dataset_name/v1/data&quot;</span><span class="p">)</span>
+<span class="n">dataset_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;datasets/dataset_name/v1/data&quot;</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dataset_path</span> <span class="o">/</span> <span class="s2">&quot;nodes.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">nodes</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>

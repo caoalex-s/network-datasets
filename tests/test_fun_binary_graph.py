@@ -95,7 +95,7 @@ def build_base_graph(nodes: Dict[str, Dict[str, Any]],
 # ---------- tests ----------
 
 def test_eval_global_conn_k1():
-    nodes, edges, probs = load_dataset_any("toynet_11edges/v1/data")
+    nodes, edges, probs = load_dataset_any("datasets/toynet_11edges/v1/data")
     G_base = build_base_graph(nodes, edges)
 
     comps_st = {eid: 1 for eid in edges}  # all components survive
@@ -105,7 +105,7 @@ def test_eval_global_conn_k1():
     assert k_val == 2, f"Expected k_val 2, got {k_val}"
 
 def test_eval_global_conn_k2():
-    nodes, edges, probs = load_dataset_any("toynet_11edges/v1/data")
+    nodes, edges, probs = load_dataset_any("datasets/toynet_11edges/v1/data")
     G_base = build_base_graph(nodes, edges)
 
     comps_st = {eid: 1 for eid in edges}  
@@ -116,7 +116,7 @@ def test_eval_global_conn_k2():
     assert k_val == 1, f"Expected k_val 1, got {k_val}"
 
 def test_eval_global_conn_k3():
-    nodes, edges, probs = load_dataset_any("toynet_11edges/v1/data")
+    nodes, edges, probs = load_dataset_any("datasets/toynet_11edges/v1/data")
     G_base = build_base_graph(nodes, edges)
 
     comps_st = {eid: 1 for eid in edges}  
@@ -127,7 +127,7 @@ def test_eval_global_conn_k3():
     assert k_val == 0, f"Expected k_val 0, got {k_val}"
 
 def test_eval_global_conn_k4():
-    nodes, edges, probs = load_dataset_any("toynet_11edges/v1/data")
+    nodes, edges, probs = load_dataset_any("datasets/toynet_11edges/v1/data")
     G_base = build_base_graph(nodes, edges)
 
     comps_st = {eid: 1 for eid in edges}  
@@ -138,7 +138,7 @@ def test_eval_global_conn_k4():
     assert k_val == 1, f"Expected k_val 1, got {k_val}"
 
 def test_eval_travel_time_to_nearest1():
-    nodes, edges, probs = load_dataset_any("toynet_11edges/v1/data")
+    nodes, edges, probs = load_dataset_any("datasets/toynet_11edges/v1/data")
     G_base = build_base_graph(nodes, edges)
 
     comps_st = {eid: 1 for eid in edges}  # all components survive
@@ -155,7 +155,7 @@ def test_eval_travel_time_to_nearest1():
     assert sys_st == 1, f"Expected system state 1, got '{sys_st}'"
 
 def test_eval_travel_time_to_nearest2():
-    nodes, edges, probs = load_dataset_any("toynet_11edges/v1/data")
+    nodes, edges, probs = load_dataset_any("datasets/toynet_11edges/v1/data")
     G_base = build_base_graph(nodes, edges)
 
     comps_st = {eid: 1 for eid in edges}  
@@ -174,7 +174,7 @@ def test_eval_travel_time_to_nearest2():
     assert sys_st == 0, f"Expected system state 0, got '{sys_st}'"
 
 def test_eval_travel_time_to_nearest3():
-    nodes, edges, probs = load_dataset_any("toynet_11edges/v1/data")
+    nodes, edges, probs = load_dataset_any("datasets/toynet_11edges/v1/data")
     G_base = build_base_graph(nodes, edges)
 
     comps_st = {eid: 1 for eid in edges}  
@@ -193,7 +193,7 @@ def test_eval_travel_time_to_nearest3():
     assert sys_st == 1, f"Expected system state 1, got '{sys_st}'"
 
 def test_eval_travel_time_to_nearest4():
-    nodes, edges, probs = load_dataset_any("toynet_11edges/v1/data")
+    nodes, edges, probs = load_dataset_any("datasets/toynet_11edges/v1/data")
     G_base = build_base_graph(nodes, edges)
 
     comps_st = {eid: 1 for eid in edges}  
@@ -212,7 +212,7 @@ def test_eval_travel_time_to_nearest4():
     assert sys_st == 0, f"Expected system state 0, got '{sys_st}'"
 
 def test_eval_travel_time_to_nearest5():
-    nodes, edges, probs = load_dataset_any("toynet_11edges/v1/data")
+    nodes, edges, probs = load_dataset_any("datasets/toynet_11edges/v1/data")
     G_base = build_base_graph(nodes, edges)
 
     comps_st = {eid: 1 for eid in edges}  

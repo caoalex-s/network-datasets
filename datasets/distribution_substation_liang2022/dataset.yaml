@@ -1,0 +1,29 @@
+name: dist-sub-110-220kV-liang2022
+version: 1.0.0
+title: Example 110/220 kV Distribution Substation Network (Liang et al., 2022)
+license: CC-BY-4.0
+description: >
+  Example distribution substation network modelled after Liang et al. (2022)
+  Includes nodes, edges, and probs, as well as macrocomponents and equipment fragility that are required to calculate edge failure probabilities.
+  Only edges can be failed (not nodes).
+contacts:
+  - name: Ji-Eun Byun
+    affiliation: University of Glasgow
+    email: jieun.byun@glasgow.ac.uk
+tags: [power, distribution, substation, fragility, earthquake]
+files:
+  nodes: data/nodes.json
+  edges: data/edges.json
+  probs: data/probs.json
+  macrocomponents: data/components/macrocomponents.json
+  equipment: data/components/equipment.json
+scripts:
+  - scripts/utils.py
+  - scripts/demo_sys_fun.ipynb
+  - scripts/demo_edge_prob_update.ipynb
+docs:
+  - docs/README.md
+  - docs/PROVENANCE.md
+  - docs/CHANGELOG.md
+citation: |
+  Liang, H., Blagojevic, N., Xie, Q., & Stojadinovic, B. (2022). Seismic risk analysis of electrical substations based on the network analysis method. Earthquake Engineering & Structural Dynamics, 51(11), 2690-2707.

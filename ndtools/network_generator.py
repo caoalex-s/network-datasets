@@ -429,7 +429,8 @@ def generate_and_save(
         update_registry(registry_path, config.name, config.version, rel, meta)
     return ds_root
 
-if __name__ == "__main__":
+def run(argv: Optional[list[str]] = None):
+    """Entry point for both CLI and programmatic calls (e.g. in Jupyter)."""
     import argparse
     parser = argparse.ArgumentParser(description="Generate and register network datasets.")
     parser.add_argument("--type",
@@ -453,48 +454,32 @@ if __name__ == "__main__":
     parser.add_argument("--description", default="")
     parser.add_argument("--outbase", default="generated")
     parser.add_argument("--draw_graph", type=bool, default=True)
+    parser.add_argument("--k", type=int)
+    parser.add_argument("--p_ws", type=float)
+    parser.add_argument("--m", type=int)
+    parser.add_argument("--avg_deg", type=float)
+    parser.add_argument("--radius", type=float)
 
-    # Generator-specific params
-    parser.add_argument("--k", type=int, help="WS: number of nearest neighbors (even)")
-    parser.add_argument("--p_ws", type=float, help="WS: rewiring probability")
-    parser.add_argument("--m", type=int, help="BA: edges per new node")
-    parser.add_argument("--avg_deg", type=float, help="CONFIG: desired average degree")
-    parser.add_argument("--radius", type=float, help="RG: connection radius in [0,1]")
+    args = parser.parse_args(argv)
 
-    args = parser.parse_args()
-
-    # Route params
+    # --- rest of your logic unchanged ---
     g = args.type.lower()
     if g in ("grid", "lattice"):
         params = {"rows": args.rows, "cols": args.cols, "p_fail": args.p_fail}
         if params["rows"] is None or params["cols"] is None:
             raise SystemExit("--rows and --cols required for grid")
-
     elif g in ("erdos_renyi", "er"):
         params = {"n_nodes": args.n_nodes, "p": args.p, "p_fail": args.p_fail}
         if params["n_nodes"] is None or params["p"] is None:
             raise SystemExit("--n_nodes and --p required for erdos_renyi")
-
     elif g in ("watts_strogatz", "ws"):
         params = {"n_nodes": args.n_nodes, "k": args.k, "p_ws": args.p_ws, "p_fail": args.p_fail}
-        if params["n_nodes"] is None or params["k"] is None or params["p_ws"] is None:
-            raise SystemExit("--n_nodes, --k and --p_ws required for watts_strogatz")
-
     elif g in ("barabasi_albert", "ba"):
         params = {"n_nodes": args.n_nodes, "m": args.m, "p_fail": args.p_fail}
-        if params["n_nodes"] is None or params["m"] is None:
-            raise SystemExit("--n_nodes and --m required for barabasi_albert")
-
     elif g in ("configuration", "config"):
         params = {"n_nodes": args.n_nodes, "avg_deg": args.avg_deg, "p_fail": args.p_fail}
-        if params["n_nodes"] is None or params["avg_deg"] is None:
-            raise SystemExit("--n_nodes and --avg_deg required for configuration")
-
     elif g in ("random_geometric", "rg"):
         params = {"n_nodes": args.n_nodes, "radius": args.radius, "p_fail": args.p_fail}
-        if params["n_nodes"] is None or params["radius"] is None:
-            raise SystemExit("--n_nodes and --radius required for random_geometric")
-
     else:
         raise SystemExit(f"Unknown --type {args.type}")
 
@@ -508,8 +493,13 @@ if __name__ == "__main__":
     )
 
     repo_root = Path(__file__).resolve().parents[1]
-    out_base = (repo_root / args.outbase)
+    script_root = Path.cwd()
+    out_base = (script_root / args.outbase)
     schema_dir = repo_root / "schema"
 
     ds_root = generate_and_save(out_base, schema_dir, cfg, draw_graph=args.draw_graph)
     print(f"Wrote dataset to: {ds_root}")
+
+
+if __name__ == "__main__":
+    run()

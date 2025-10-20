@@ -46,8 +46,10 @@
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="datasets.html">Available Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ndtools.html">ndtools Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generating%20random%20networks.html">Random Network Generator (ndtools)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="how%20to%20contribute.html">How to contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributors.html">Contributors</a></li>
 </ul>
 
         </div>
@@ -114,35 +116,17 @@ Works with your existing layout:</p>
 <span class="sig-prename descclassname"><span class="pre">ndtools.graphs.</span></span><span class="sig-name descname"><span class="pre">draw_graph_from_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">Path</span></a></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'spring'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'skyblue'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gray'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_node_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_edge_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'graph.png'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">Path</span></a></span></span><a class="reference internal" href="_modules/ndtools/graphs.html#draw_graph_from_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ndtools.graphs.draw_graph_from_data" title="Link to this definition"></a></dt>
 <dd><p>Load nodes/edges from JSON files in <cite>data_dir</cite>, draw the graph, and save to the same dir.</p>
 <dl class="simple">
-<dt>Expects:</dt><dd><ul class="simple">
-<li><p>nodes.json : [{“id”: “A”, “attr1”: …, …}, …]</p></li>
-<li><p>edges.json : [{“source”: “A”, “target”: “B”, “eid”: “e1”, “attr2”: …, …}, …]</p></li>
+<dt>Expects (preferred, current repo format):</dt><dd><ul class="simple">
+<li><p>nodes.json : {“n0”: {“x”: null, “y”: null, …}, …}</p></li>
+<li><dl class="simple">
+<dt>edges.json<span class="classifier">[{“id”: “e0”,”from”:”n0”,”to”:”n1”,…}, …]</span></dt><dd><p>or {“e0”:{“from”:”n0”,”to”:”n1”,…}, …}</p>
+</dd>
+</dl>
+</li>
 </ul>
 </dd>
 </dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data_dir</strong> – Directory containing nodes.json and edges.json.</p></li>
-<li><p><strong>layout</strong> – Layout algorithm (“spring”, “kamada_kawai”, “circular”, “shell”).</p></li>
-<li><p><strong>node_color</strong> – Color for nodes.</p></li>
-<li><p><strong>node_size</strong> – Node size in points^2.</p></li>
-<li><p><strong>edge_color</strong> – Color for edges.</p></li>
-<li><p><strong>with_node_labels</strong> – Whether to display node labels.</p></li>
-<li><p><strong>with_edge_labels</strong> – Whether to display edge labels (uses ‘eid’ if present).</p></li>
-<li><p><strong>title</strong> – Optional title for the plot.</p></li>
-<li><p><strong>layout_kwargs</strong> – Optional kwargs passed to the layout function.</p></li>
-<li><p><strong>output_name</strong> – Filename of the saved image (saved under data_dir).</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Path to the saved image file.</p>
-</dd>
-</dl>
-<dl class="simple">
-<dt>Example usage:</dt><dd><p>draw_graph_from_data(“ema_highway/v1/data”)</p>
-</dd>
-</dl>
+<p>Auto-chooses a layout if x/y are missing or null on any node.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -251,35 +235,17 @@ edges_dict: {edge_id: {“from”: str, “to”: str, “directed”: bool}}</p
 <span class="sig-prename descclassname"><span class="pre">ndtools.graphs.</span></span><span class="sig-name descname"><span class="pre">draw_graph_from_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">Path</span></a></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'spring'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'skyblue'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gray'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_node_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_edge_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'graph.png'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">Path</span></a></span></span><a class="reference internal" href="_modules/ndtools/graphs.html#draw_graph_from_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Load nodes/edges from JSON files in <cite>data_dir</cite>, draw the graph, and save to the same dir.</p>
 <dl class="simple">
-<dt>Expects:</dt><dd><ul class="simple">
-<li><p>nodes.json : [{“id”: “A”, “attr1”: …, …}, …]</p></li>
-<li><p>edges.json : [{“source”: “A”, “target”: “B”, “eid”: “e1”, “attr2”: …, …}, …]</p></li>
+<dt>Expects (preferred, current repo format):</dt><dd><ul class="simple">
+<li><p>nodes.json : {“n0”: {“x”: null, “y”: null, …}, …}</p></li>
+<li><dl class="simple">
+<dt>edges.json<span class="classifier">[{“id”: “e0”,”from”:”n0”,”to”:”n1”,…}, …]</span></dt><dd><p>or {“e0”:{“from”:”n0”,”to”:”n1”,…}, …}</p>
+</dd>
+</dl>
+</li>
 </ul>
 </dd>
 </dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data_dir</strong> – Directory containing nodes.json and edges.json.</p></li>
-<li><p><strong>layout</strong> – Layout algorithm (“spring”, “kamada_kawai”, “circular”, “shell”).</p></li>
-<li><p><strong>node_color</strong> – Color for nodes.</p></li>
-<li><p><strong>node_size</strong> – Node size in points^2.</p></li>
-<li><p><strong>edge_color</strong> – Color for edges.</p></li>
-<li><p><strong>with_node_labels</strong> – Whether to display node labels.</p></li>
-<li><p><strong>with_edge_labels</strong> – Whether to display edge labels (uses ‘eid’ if present).</p></li>
-<li><p><strong>title</strong> – Optional title for the plot.</p></li>
-<li><p><strong>layout_kwargs</strong> – Optional kwargs passed to the layout function.</p></li>
-<li><p><strong>output_name</strong> – Filename of the saved image (saved under data_dir).</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Path to the saved image file.</p>
-</dd>
-</dl>
-<dl class="simple">
-<dt>Example usage:</dt><dd><p>draw_graph_from_data(“ema_highway/v1/data”)</p>
-</dd>
-</dl>
+<p>Auto-chooses a layout if x/y are missing or null on any node.</p>
 </dd></dl>
 
 </section>

@@ -45,6 +45,26 @@ Grid (8×8)
      --cols 8 ^
      --p_fail 0.1 ^
      --description "8x8 grid demo"
+     --outbase "data"
+
+Alternatively, you can run the same generation process directly from a Python script or Jupyter notebook
+using the ``network_generator.run()`` function:
+
+.. code-block:: python
+
+    from ndtools import network_generator
+
+    network_generator.run([
+        "--type", "grid",
+        "--name", "grid_8x8",
+        "--rows", "8",
+        "--cols", "8",
+        "--p_fail", "0.1",
+        "--description", "Grid(8,8,0.1) demo",
+        "--outbase", "data"
+    ])
+
+This applies to all the examples below; just replace the arguments accordingly.
 
 Erdős–Rényi (ER)
 ----------------

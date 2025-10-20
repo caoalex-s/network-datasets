@@ -22,7 +22,7 @@ toynet-11edges
 
 * **Version**: 1.0.0  
 * **License**: CC-BY-4.0  
-* **Path**: ``toynet-11edges/v1``
+* **Path**: ``datasets/toynet-11edges/v1``
 
 A small toy network with 8 nodes and 11 edges, designed for testing and learning purposes.
 
@@ -43,7 +43,7 @@ ema-highway
 
 * **Version**: 1.0.0  
 * **License**: CC-BY-4.0  
-* **Path**: ``ema-highway/v1``
+* **Path**: ``datasets/ema-highway/v1``
 
 Eastern Massachusetts benchmark highway network with nodes, edges, and probability files.
 
@@ -67,12 +67,12 @@ Eastern Massachusetts benchmark highway network with nodes, edges, and probabili
 Generated Example Collection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``generated/`` directory contains **synthetic example datasets** produced with
+The ``datasets/generated/`` directory contains **synthetic example datasets** produced with
 ``ndtools.network_generator``. These examples are intended for tutorials, quick tests,
 and format demonstrations. They follow the same JSON schemas as all curated datasets.
 
 .. note::
-   See :file:`generated/README.md` for an overview, and :file:`generated/PROVENANCE.md`
+   See :file:`datasets/generated/README.md` for an overview, and :file:`datasets/generated/PROVENANCE.md`
    for the exact commands and parameters used to generate each example.
 
 **Layout**
@@ -116,7 +116,7 @@ distribution-substation-liang2022
 
 * **Version**: 1.0.0  
 * **License**: CC-BY-4.0  
-* **Path**: ``distribution-substation-liang2022/v1``
+* **Path**: ``datasets/distribution-substation-liang2022/v1``
 
 Example 110/220 kV distribution substation network based on Liang et al. (2022). Includes nodes, edges, macrocomponents, equipment fragility, and probability files.
 
@@ -263,7 +263,7 @@ Using ndtools
 
    # Get dataset paths
    nodes_path, edges_path, probs_path = dataset_paths(
-       Path('.'), 'dataset_name', 'v1'
+       Path('datasets'), 'dataset_name', 'v1'
    )
    
    # Load data
@@ -279,7 +279,7 @@ Direct Loading
    import json
    from pathlib import Path
 
-   dataset_path = Path("dataset_name/v1/data")
+   dataset_path = Path("datasets/dataset_name/v1/data")
    
    with open(dataset_path / "nodes.json") as f:
        nodes = json.load(f)

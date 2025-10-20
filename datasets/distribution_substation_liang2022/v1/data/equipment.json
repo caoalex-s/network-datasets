@@ -1,0 +1,92 @@
+{
+    "PF": {
+        "fragility": {
+            "mu": 1.5,
+            "beta": 0.35
+        }
+    },
+    "VT220": {
+        "fragility": {
+            "mu": 0.49,
+            "beta": 0.36
+        }
+    },
+    "DSH220": {
+        "fragility": {
+            "mu": 0.57,
+            "beta": 0.22
+        }
+    },
+    "DSV220": {
+        "fragility": {
+            "mu": 0.54,
+            "beta": 0.34
+        }
+    },
+    "CT220": {
+        "fragility": {
+            "mu": 0.42,
+            "beta": 0.27
+        }
+    },
+    "CB220": {
+        "fragility": {
+            "mu": 0.53,
+            "beta": 0.33
+        }
+    },
+    "PI220": {
+        "fragility": {
+            "mu": 0.7,
+            "beta": 0.42
+        }
+    },
+    "VT110": {
+        "fragility": {
+            "mu": 0.77,
+            "beta": 0.37
+        }
+    },
+    "DSH110": {
+        "fragility": {
+            "mu": 0.82,
+            "beta": 0.59
+        }
+    },
+    "DSV110": {
+        "fragility": {
+            "mu": 0.75,
+            "beta": 0.7
+        }
+    },
+    "CT110": {
+        "fragility": {
+            "mu": 0.75,
+            "beta": 0.7
+        }
+    },
+    "CB110": {
+        "fragility": {
+            "mu": 0.7,
+            "beta": 0.7
+        }
+    },
+    "PI110": {
+        "fragility": {
+            "mu": 0.8,
+            "beta": 0.42
+        }
+    },
+    "BT": {
+        "fragility": {
+            "mu": 1.0,
+            "beta": 0.35
+        }
+    },
+    "TF": {
+        "fragility": {
+            "mu": 0.59,
+            "beta": 0.56
+        }
+    }
+}

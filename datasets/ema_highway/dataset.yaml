@@ -1,0 +1,32 @@
+name: ema-highway
+version: 1.0.0
+title: Eastern Massachusetts (EMA) Highway Benchmark Network
+license: CC-BY-4.0
+description: >
+  Eastern Massachusetts (EMA) schematic highway network intended for testing
+  network reliability algorithms. Includes nodes, edges, and example
+  probability files (binary and multi-state). Edges are undirected
+  (directed: false) and lengths are in kilometers computed from planar
+  coordinates.
+
+contacts:
+  - name: Ji-Eun Byun
+    affiliation: University of Glasgow
+    email: jieun.byun@glasgow.ac.uk
+
+tags: [transport, roads, highway, network]
+
+files:
+  nodes: data/nodes.json
+  edges: data/edges.json
+  probs_binary: data/probs_bin.json
+  probs_multistate: data/probs_mult.json
+
+docs:
+  - docs/README.md
+  - docs/PROVENANCE.md
+  - docs/CHANGELOG.md
+
+citation: |
+  Byun, J.-E., Ryu, H., & Straub, D. (2024). Branch-and-bound algorithm for efficient
+  reliability analysis of general coherent systems. arXiv:2410.22363.
